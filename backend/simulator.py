@@ -135,6 +135,22 @@ class ICE2Simulator:
 
         return [header_word, frame.event_code & 0xFFFF, *payload_words]
 
+    def read_all_port_pdi(
+        self,
+        ports: list[int],
+        payload_word_count: int = DEFAULT_PAYLOAD_WORD_COUNT,
+        block_mode: PDIBlockMode = "multiple",
+    ) -> dict[int, list[int]]:
+        """Generate multiple simulated PDI blocks in one call."""
+        return {
+            port: self.read_port_pdi(
+                port=port,
+                payload_word_count=payload_word_count,
+                block_mode=block_mode,
+            )
+            for port in ports
+        }
+
     def _elapsed_seconds(self) -> float:
         """Elapsed monotonic time since the simulator module booted."""
         return time.monotonic() - SIMULATOR_BOOT_TIME

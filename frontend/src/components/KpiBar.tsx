@@ -10,6 +10,11 @@ interface KpiBarProps {
   backendMode: string
   connectionState: string
   connectionTone: 'normal' | 'warning' | 'critical' | 'neutral'
+  connectionMeta: string
+  backendPollMs: number
+  uiRefreshMs: number
+  cacheAgeMs: number | null
+  cacheIsStale: boolean
   lastUpdated: string | null
   isRefreshing: boolean
 }
@@ -22,16 +27,21 @@ function KpiBar({
   backendMode,
   connectionState,
   connectionTone,
+  connectionMeta,
+  backendPollMs,
+  uiRefreshMs,
+  cacheAgeMs,
+  cacheIsStale,
   lastUpdated,
   isRefreshing,
 }: KpiBarProps) {
   const items = useMemo(
     () => [
       {
-        label: 'Total ports',
+        label: 'Ports',
         value: String(totalPorts),
         tone: 'neutral' as const,
-        meta: 'All configured monitor slots',
+        meta: 'Configured slots',
       },
       {
         label: 'Normal',
@@ -40,45 +50,62 @@ function KpiBar({
         meta: 'Operational and valid PDI',
       },
       {
-        label: 'Warning',
+        label: 'Warn',
         value: String(warningPorts),
         tone: 'warning' as const,
-        meta: 'Events active or PDI invalid',
+        meta: 'Event or invalid PDI',
       },
       {
         label: 'Critical',
         value: String(criticalPorts),
         tone: 'critical' as const,
-        meta: 'Fault condition detected',
+        meta: 'Fault detected',
       },
       {
-        label: 'Backend mode',
+        label: 'Mode',
         value: backendMode,
-        tone: backendMode === 'simulator' ? ('normal' as const) : ('warning' as const),
-        meta: 'Simulator-first, hardware-ready shell',
+        tone: backendMode === 'real' ? ('normal' as const) : ('warning' as const),
+        meta: 'Real-first runtime',
       },
       {
-        label: 'Connection state',
+        label: 'Connection',
         value: connectionState,
         tone: connectionTone,
-        meta: 'Frontend monitor session',
+        meta: connectionMeta,
       },
       {
-        label: 'Refresh cadence',
-        value: '1000 ms',
+        label: 'Backend',
+        value: `${backendPollMs} ms`,
+        tone: 'normal' as const,
+        meta: 'Poll cadence',
+      },
+      {
+        label: 'UI',
+        value: `${uiRefreshMs} ms`,
         tone: isRefreshing ? ('normal' as const) : ('neutral' as const),
-        meta: lastUpdated ? `Last sync ${lastUpdated}` : 'Waiting for first sample',
+        meta: 'Refresh cadence',
+      },
+      {
+        label: 'Cache',
+        value: cacheAgeMs === null ? '--' : `${cacheAgeMs} ms`,
+        tone: cacheIsStale ? ('warning' as const) : ('normal' as const),
+        meta: lastUpdated ? `Updated ${lastUpdated}` : 'Awaiting first sample',
       },
     ],
     [
       backendMode,
+      backendPollMs,
+      cacheAgeMs,
+      cacheIsStale,
       connectionState,
+      connectionMeta,
       connectionTone,
       criticalPorts,
       isRefreshing,
       lastUpdated,
       normalPorts,
       totalPorts,
+      uiRefreshMs,
       warningPorts,
     ],
   )
@@ -93,7 +120,7 @@ function KpiBar({
           </div>
           <strong className="kpi-card__value">{item.value}</strong>
           <p className="kpi-card__meta">{item.meta}</p>
-          {item.label === 'Refresh cadence' ? (
+          {item.label === 'UI' ? (
             <span
               className={`kpi-card__signal ${isRefreshing ? 'kpi-card__signal--active' : ''}`}
               aria-hidden="true"

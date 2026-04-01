@@ -1,18 +1,46 @@
 import type {
+  AllPortsHistoryResponse,
+  AllPortsPdiResponse,
   ConnectRequest,
   ConnectResponse,
   ConnectionStatusResponse,
   ConvertRequest,
   ConvertResponse,
-  DecodeSettings,
-  DecodeType,
+  DisconnectResponse,
   HealthResponse,
-  PdiResponse,
 } from './types'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') ?? '/api'
 
+function readRefreshInterval() {
+  const rawValue =
+    import.meta.env.VITE_UI_REFRESH_MS ??
+    import.meta.env.VITE_UI_REFRESH_INTERVAL_MS ??
+    '200'
+
+  const parsedValue = Number(rawValue)
+
+  if (!Number.isFinite(parsedValue) || parsedValue < 50) {
+    return 200
+  }
+
+  return Math.round(parsedValue)
+}
+
+export const UI_REFRESH_INTERVAL_MS = readRefreshInterval()
+export const HISTORY_CHART_MAX_POINTS = 72
+
+export const DEFAULT_REAL_CONNECT_REQUEST: ConnectRequest = {
+  mode: 'real',
+  host: '192.168.1.108',
+  port: 502,
+  slave_id: 1,
+  timeout: 3,
+  retries: 1,
+}
+
 export const DEFAULT_SIMULATOR_CONNECT_REQUEST: ConnectRequest = {
+  mode: 'simulator',
   host: 'ice2-simulator',
   port: 502,
   slave_id: 1,
@@ -47,42 +75,6 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return body as T
 }
 
-function getRegistersNeeded(dataType: DecodeType): number {
-  if (dataType === 'uint32' || dataType === 'int32' || dataType === 'float32') {
-    return 2
-  }
-
-  if (dataType === 'binary') {
-    return 2
-  }
-
-  return 1
-}
-
-function swapRegisterBytes(registerValue: number): number {
-  return ((registerValue & 0xff) << 8) | ((registerValue >> 8) & 0xff)
-}
-
-function buildConvertPayload(
-  registers: number[],
-  settings: DecodeSettings,
-  overrideType?: DecodeType,
-): ConvertRequest {
-  const decodeType = overrideType ?? settings.dataType
-  const selectedRegisters = registers.slice(0, getRegistersNeeded(decodeType))
-  const byteAdjustedRegisters =
-    settings.byteOrder === 'little'
-      ? selectedRegisters.map(swapRegisterBytes)
-      : selectedRegisters
-
-  return {
-    registers: byteAdjustedRegisters,
-    data_type: decodeType,
-    word_order: settings.wordOrder,
-    word_length: decodeType === 'binary' ? byteAdjustedRegisters.length : undefined,
-  }
-}
-
 export async function fetchHealth(): Promise<HealthResponse> {
   return request<HealthResponse>('/health')
 }
@@ -100,8 +92,26 @@ export async function connectTarget(
   })
 }
 
-export async function fetchPortPdi(portNumber: number): Promise<PdiResponse> {
-  return request<PdiResponse>(`/ports/${portNumber}/pdi`)
+export async function disconnectTarget(): Promise<DisconnectResponse> {
+  return request<DisconnectResponse>('/disconnect', {
+    method: 'POST',
+  })
+}
+
+export async function fetchAllPortsPdi(): Promise<AllPortsPdiResponse> {
+  return request<AllPortsPdiResponse>('/ports/all/pdi')
+}
+
+export async function fetchAllPortsHistory(
+  windowMs: number,
+  maxPoints = HISTORY_CHART_MAX_POINTS,
+): Promise<AllPortsHistoryResponse> {
+  const searchParams = new URLSearchParams({
+    window_ms: String(windowMs),
+    max_points: String(maxPoints),
+  })
+
+  return request<AllPortsHistoryResponse>(`/ports/all/history?${searchParams.toString()}`)
 }
 
 export async function convertRegisters(
@@ -111,12 +121,4 @@ export async function convertRegisters(
     method: 'POST',
     body: JSON.stringify(payload),
   })
-}
-
-export async function fetchDecodedPreview(
-  registers: number[],
-  settings: DecodeSettings,
-  overrideType?: DecodeType,
-): Promise<ConvertResponse> {
-  return convertRegisters(buildConvertPayload(registers, settings, overrideType))
 }

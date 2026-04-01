@@ -1,16 +1,24 @@
 import { memo, useMemo } from 'react'
 
 import type {
-  DecodeType,
+  ByteOrder,
   DecodedPreview,
+  DecodeType,
+  PortDisplayConfig,
+  PortDisplayOverride,
   PortSeverity,
   PortSnapshot,
+  WordOrder,
 } from '../api/types'
 import StatusBadge from './StatusBadge'
 
 interface PortCardProps {
   snapshot: PortSnapshot
-  selectedDecodeType: DecodeType
+  displayConfig: PortDisplayConfig
+  displayOverride: PortDisplayOverride | null
+  featuredPreview: DecodedPreview
+  onOverrideChange: (portNumber: number, override: PortDisplayOverride) => void
+  onOpenOverview: (portNumber: number) => void
 }
 
 const severityLabels: Record<PortSeverity, string> = {
@@ -19,291 +27,230 @@ const severityLabels: Record<PortSeverity, string> = {
   critical: 'Critical',
 }
 
-const quickDecodeTypes = ['float32', 'uint32', 'int32', 'binary'] as const
+const decodeTypeOptions: Array<{ value: DecodeType; label: string }> = [
+  { value: 'float32', label: 'Float32' },
+  { value: 'uint16', label: 'UInt16' },
+  { value: 'int16', label: 'Int16' },
+  { value: 'uint32', label: 'UInt32' },
+  { value: 'int32', label: 'Int32' },
+  { value: 'binary', label: 'Binary' },
+]
 
-function booleanTone(isActive: boolean) {
-  return isActive ? 'normal' : 'neutral'
-}
+const wordOrderOptions: Array<{ value: WordOrder; label: string }> = [
+  { value: 'big', label: 'Big words' },
+  { value: 'little', label: 'Little words' },
+]
 
-function formatRegisters(registers: number[]) {
+const byteOrderOptions: Array<{ value: ByteOrder; label: string }> = [
+  { value: 'big', label: 'Big bytes' },
+  { value: 'little', label: 'Little bytes' },
+]
+
+function buildRawPreview(registers: number[]) {
   if (registers.length === 0) {
-    return 'No registers'
+    return 'No payload'
   }
 
-  return registers.join(', ')
+  return registers
+    .slice(0, 4)
+    .map((register) => register.toString())
+    .join(' | ')
 }
 
-function renderPreviewMeta(preview: DecodedPreview) {
-  if (preview.error) {
-    return preview.error
+function buildRegisterMeta(registers: number[]) {
+  if (registers.length === 0) {
+    return 'Awaiting payload registers'
   }
 
-  return `Registers ${formatRegisters(preview.sourceRegisters)}`
+  return `${registers.length} payload words`
 }
 
-function PortCard({ snapshot, selectedDecodeType }: PortCardProps) {
-  const { pdi, severity, portNumber, decodes, error } = snapshot
+function booleanLabel(isActive: boolean, activeLabel: string, inactiveLabel: string) {
+  return isActive ? activeLabel : inactiveLabel
+}
 
-  const quickDecodes = useMemo(
-    () =>
-      quickDecodeTypes.map((decodeType) => ({
-        decodeType,
-        preview: decodes?.[decodeType] ?? null,
-      })),
-    [decodes],
-  )
+function PortCard({
+  snapshot,
+  displayConfig,
+  displayOverride,
+  featuredPreview,
+  onOverrideChange,
+  onOpenOverview,
+}: PortCardProps) {
+  const { pdi, severity, portNumber } = snapshot
 
-  const payloadRegisters = useMemo(
-    () => formatRegisters(pdi?.payload.registers ?? []),
-    [pdi],
-  )
-
-  const headerSummary = useMemo(() => {
+  const quickIndicators = useMemo(() => {
     if (!pdi) {
-      return 'Awaiting backend data'
+      return [
+        { label: 'Operational', value: '--', tone: 'neutral' as const },
+        { label: 'PDI', value: '--', tone: 'neutral' as const },
+        { label: 'Event', value: '--', tone: 'neutral' as const },
+      ]
     }
 
-    return `${pdi.connection.host}:${pdi.connection.port} | ${pdi.pdi_block.mode} block`
+    return [
+      {
+        label: 'Operational',
+        value: booleanLabel(pdi.header.port_status.operational, 'Online', 'Offline'),
+        tone: pdi.header.port_status.operational ? ('normal' as const) : ('neutral' as const),
+      },
+      {
+        label: 'PDI',
+        value: booleanLabel(pdi.header.port_status.pdi_valid, 'Valid', 'Invalid'),
+        tone: pdi.header.port_status.pdi_valid
+          ? ('normal' as const)
+          : pdi.header.port_status.fault
+            ? ('critical' as const)
+            : ('warning' as const),
+      },
+      {
+        label: 'Event',
+        value: pdi.header.event_code.active ? pdi.header.event_code.raw : 'None',
+        tone: pdi.header.event_code.active ? ('warning' as const) : ('neutral' as const),
+      },
+    ]
   }, [pdi])
 
-  return (
-    <article className={`port-card port-card--${severity}`}>
-      <header className="port-card__header">
-        <div className="port-card__header-copy">
-          <p className="port-card__eyebrow">Port {portNumber}</p>
-          <h3 className="port-card__title">PDI channel monitor</h3>
-          <p className="port-card__target">{headerSummary}</p>
-        </div>
+  const rawPreview = useMemo(
+    () => buildRawPreview(pdi?.payload.registers ?? []),
+    [pdi?.payload.registers],
+  )
 
-        <div className="port-card__badge-stack">
+  const hasProfileOverride =
+    displayOverride?.preferredDecodeType !== undefined ||
+    displayOverride?.wordOrder !== undefined ||
+    displayOverride?.byteOrder !== undefined
+
+  function updateProfileField<Key extends keyof PortDisplayOverride>(
+    field: Key,
+    value: PortDisplayOverride[Key],
+  ) {
+    onOverrideChange(portNumber, {
+      ...(displayOverride ?? {}),
+      [field]: value,
+    })
+  }
+
+  function clearQuickProfile() {
+    const nextOverride = { ...(displayOverride ?? {}) }
+    delete nextOverride.preferredDecodeType
+    delete nextOverride.wordOrder
+    delete nextOverride.byteOrder
+    onOverrideChange(portNumber, nextOverride)
+  }
+
+  return (
+    <article className={`monitor-card monitor-card--${severity}`}>
+      <header className="monitor-card__header">
+        <div className="monitor-card__heading">
+          <p className="monitor-card__eyebrow">Port {portNumber}</p>
+          <h3 className="monitor-card__title">{displayConfig.label}</h3>
+        </div>
+        <div className="monitor-card__badges">
           <StatusBadge label={severityLabels[severity]} tone={severity} />
           <StatusBadge
-            label={pdi?.header.port_status.pdi_valid ? 'PDI valid' : 'PDI invalid'}
-            tone={
-              pdi?.header.port_status.pdi_valid
-                ? 'normal'
-                : pdi?.header.port_status.fault
-                  ? 'critical'
-                  : 'warning'
-            }
-          />
-          <StatusBadge
-            label={pdi?.header.event_code.active ? pdi.header.event_code.hex : 'No event'}
-            tone={pdi?.header.event_code.active ? 'warning' : 'neutral'}
+            label={hasProfileOverride ? 'Custom decode' : 'Profile default'}
+            tone={hasProfileOverride ? 'warning' : 'neutral'}
           />
         </div>
       </header>
 
-      {!pdi ? (
-        <>
-          <div className="metrics-grid metrics-grid--placeholder">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="metric-item metric-item--muted">
-                <span className="metric-item__label">Waiting</span>
-                <strong className="metric-item__value">--</strong>
-              </div>
+      <div className="monitor-card__value-shell">
+        <div className="monitor-card__value-copy">
+          <p className="monitor-card__value-label">{displayConfig.engineeringLabel}</p>
+          <div className="monitor-card__value-line">
+            <strong className="monitor-card__value">{featuredPreview.displayValue}</strong>
+            {displayConfig.engineeringUnit ? (
+              <span className="monitor-card__unit">{displayConfig.engineeringUnit}</span>
+            ) : null}
+          </div>
+          <p className="monitor-card__value-meta">
+            {featuredPreview.error ?? buildRegisterMeta(pdi?.payload.registers ?? [])}
+          </p>
+        </div>
+
+        <div className="monitor-card__indicator-row">
+          {quickIndicators.map((indicator) => (
+            <div key={indicator.label} className="monitor-indicator">
+              <span className="monitor-indicator__label">{indicator.label}</span>
+              <StatusBadge label={String(indicator.value)} tone={indicator.tone} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="monitor-card__raw">
+        <span className="monitor-card__raw-label">Raw preview</span>
+        <code className="monitor-card__raw-value">{rawPreview}</code>
+      </div>
+
+      <div className="monitor-card__profile-strip">
+        <label className="monitor-card__profile-field">
+          <span className="monitor-card__profile-label">Decode</span>
+          <select
+            value={displayConfig.preferredDecodeType}
+            onChange={(event) =>
+              updateProfileField('preferredDecodeType', event.target.value as DecodeType)
+            }
+          >
+            {decodeTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
             ))}
-          </div>
+          </select>
+        </label>
 
-          <div className="card-panels">
-            <section className="surface-panel surface-panel--decode">
-              <div className="surface-panel__header">
-                <p className="surface-panel__title">Decoded preview</p>
-                <StatusBadge label="Awaiting data" tone="neutral" />
-              </div>
-              <div className="surface-panel__placeholder">
-                <p className="surface-panel__empty-title">Port data unavailable</p>
-                <p className="surface-panel__empty-body">
-                  {error ?? 'The card is waiting for its first payload sample.'}
-                </p>
-              </div>
-            </section>
+        <label className="monitor-card__profile-field">
+          <span className="monitor-card__profile-label">Words</span>
+          <select
+            value={displayConfig.wordOrder}
+            onChange={(event) =>
+              updateProfileField('wordOrder', event.target.value as WordOrder)
+            }
+          >
+            {wordOrderOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
 
-            <section className="surface-panel surface-panel--telemetry">
-              <div className="surface-panel__header">
-                <p className="surface-panel__title">Header detail</p>
-                <StatusBadge label="Offline" tone="critical" />
-              </div>
-              <div className="detail-list">
-                <div className="detail-row">
-                  <span>Port status</span>
-                  <strong>--</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Aux input</span>
-                  <strong>--</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Event code</span>
-                  <strong>--</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Fault severity</span>
-                  <strong>--</strong>
-                </div>
-              </div>
-            </section>
-          </div>
+        <label className="monitor-card__profile-field">
+          <span className="monitor-card__profile-label">Bytes</span>
+          <select
+            value={displayConfig.byteOrder}
+            onChange={(event) =>
+              updateProfileField('byteOrder', event.target.value as ByteOrder)
+            }
+          >
+            {byteOrderOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
 
-          <section className="surface-panel surface-panel--payload">
-            <div className="surface-panel__header">
-              <p className="surface-panel__title">Payload snapshot</p>
-              <StatusBadge label="No payload" tone="neutral" />
-            </div>
-            <div className="payload-scroll payload-scroll--placeholder">
-              <div className="mono-surface mono-surface--compact">No registers</div>
-              <div className="mono-surface mono-surface--compact">No payload hex</div>
-            </div>
-          </section>
-        </>
-      ) : (
-        <>
-          <div className="metrics-grid">
-            <div className="metric-item">
-              <span className="metric-item__label">Init</span>
-              <StatusBadge
-                label={pdi.header.port_status.initialization_active ? 'Active' : 'Idle'}
-                tone={booleanTone(pdi.header.port_status.initialization_active)}
-              />
-            </div>
-
-            <div className="metric-item">
-              <span className="metric-item__label">Operational</span>
-              <StatusBadge
-                label={pdi.header.port_status.operational ? 'Online' : 'Offline'}
-                tone={booleanTone(pdi.header.port_status.operational)}
-              />
-            </div>
-
-            <div className="metric-item">
-              <span className="metric-item__label">PDI valid</span>
-              <StatusBadge
-                label={pdi.header.port_status.pdi_valid ? 'Valid' : 'Invalid'}
-                tone={
-                  pdi.header.port_status.pdi_valid
-                    ? 'normal'
-                    : pdi.header.port_status.fault
-                      ? 'critical'
-                      : 'warning'
-                }
-              />
-            </div>
-
-            <div className="metric-item">
-              <span className="metric-item__label">Fault</span>
-              <StatusBadge
-                label={pdi.header.port_status.fault ? 'Faulted' : 'Clear'}
-                tone={pdi.header.port_status.fault ? 'critical' : 'normal'}
-              />
-            </div>
-
-            <div className="metric-item">
-              <span className="metric-item__label">Aux input</span>
-              <StatusBadge
-                label={pdi.header.auxiliary_input.active ? 'Active' : 'Inactive'}
-                tone={booleanTone(pdi.header.auxiliary_input.active)}
-              />
-            </div>
-
-            <div className="metric-item">
-              <span className="metric-item__label">Event raw</span>
-              <strong className="metric-item__value">{pdi.header.event_code.raw}</strong>
-            </div>
-          </div>
-
-          <div className="card-panels">
-            <section className="surface-panel surface-panel--decode">
-              <div className="surface-panel__header">
-                <p className="surface-panel__title">Decoded preview</p>
-                <StatusBadge
-                  label={selectedDecodeType}
-                  tone={decodes?.featured.error ? 'warning' : 'normal'}
-                />
-              </div>
-
-              <div className="featured-decode">
-                <p className="featured-decode__label">Selected decode</p>
-                <p className="featured-decode__value">
-                  {decodes?.featured.displayValue ?? 'No preview yet'}
-                </p>
-                <p className="featured-decode__meta">
-                  {decodes?.featured
-                    ? renderPreviewMeta(decodes.featured)
-                    : 'Preview pending'}
-                </p>
-              </div>
-
-              <div className="decode-grid">
-                {quickDecodes.map(({ decodeType, preview }) => (
-                  <div key={decodeType} className="decode-cell">
-                    <span className="decode-cell__label">{decodeType}</span>
-                    <strong className="decode-cell__value">
-                      {preview?.displayValue ?? 'Unavailable'}
-                    </strong>
-                    <span className="decode-cell__meta">
-                      {preview ? renderPreviewMeta(preview) : 'No preview'}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="surface-panel surface-panel--telemetry">
-              <div className="surface-panel__header">
-                <p className="surface-panel__title">Header detail</p>
-                <StatusBadge label={pdi.header.port_status.hex} tone={severity} />
-              </div>
-
-              <div className="detail-list">
-                <div className="detail-row">
-                  <span>Port status</span>
-                  <strong>{pdi.header.port_status.hex}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Aux input</span>
-                  <strong>{pdi.header.auxiliary_input.hex}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Event code</span>
-                  <strong>{pdi.header.event_code.hex}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Fault severity</span>
-                  <strong>{pdi.header.port_status.fault_severity ?? 'none'}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Event active</span>
-                  <strong>{pdi.header.event_code.active ? 'true' : 'false'}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Base1 address</span>
-                  <strong>{pdi.pdi_block.base1_address}</strong>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          <section className="surface-panel surface-panel--payload">
-            <div className="surface-panel__header">
-              <div>
-                <p className="surface-panel__title">Payload snapshot</p>
-                <p className="surface-panel__subtext">
-                  Base1 {pdi.pdi_block.base1_address} | total words{' '}
-                  {pdi.pdi_block.total_word_count}
-                </p>
-              </div>
-              <StatusBadge label={`${pdi.payload.registers.length} words`} tone="neutral" />
-            </div>
-
-            <div className="payload-scroll">
-              <div className="mono-surface mono-surface--compact">{payloadRegisters}</div>
-              <div className="mono-surface mono-surface--compact">
-                {pdi.payload.hex || 'No payload hex'}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+        <div className="monitor-card__actions">
+          <button
+            type="button"
+            className="action-button action-button--ghost action-button--compact"
+            onClick={() => onOpenOverview(portNumber)}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            className="action-button action-button--ghost action-button--compact"
+            onClick={clearQuickProfile}
+            disabled={!hasProfileOverride}
+          >
+            Default
+          </button>
+        </div>
+      </div>
     </article>
   )
 }
@@ -312,5 +259,7 @@ export default memo(
   PortCard,
   (previousProps, nextProps) =>
     previousProps.snapshot === nextProps.snapshot &&
-    previousProps.selectedDecodeType === nextProps.selectedDecodeType,
+    previousProps.displayConfig === nextProps.displayConfig &&
+    previousProps.displayOverride === nextProps.displayOverride &&
+    previousProps.featuredPreview === nextProps.featuredPreview,
 )

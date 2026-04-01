@@ -2,17 +2,22 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import asdict, dataclass
 from typing import Literal, Protocol, Sequence
 
 from pymodbus.client import ModbusTcpClient
 
 
+BackendMode = Literal["real", "simulator"]
 PDIBlockMode = Literal["multiple", "specific"]
 
 PORT_COUNT = 8
 HEADER_WORD_COUNT = 2
 DEFAULT_PAYLOAD_WORD_COUNT = 16  # 32 bytes of payload, matching the default PDI size from the manual.
+MAX_MODBUS_REGISTERS_PER_READ = 125
+
+logger = logging.getLogger("ice2.backend.modbus")
 
 
 @dataclass(slots=True)
@@ -20,6 +25,7 @@ class ModbusConnectionConfig:
     """Connection settings for a single ICE2 target."""
 
     host: str
+    mode: BackendMode = "real"
     port: int = 502
     slave_id: int = 1
     timeout: float = 3.0
@@ -62,6 +68,14 @@ class ICE2Backend(Protocol):
         block_mode: PDIBlockMode = "multiple",
     ) -> list[int]:
         """Read a single ICE2 port PDI block."""
+
+    def read_all_port_pdi(
+        self,
+        ports: Sequence[int],
+        payload_word_count: int = DEFAULT_PAYLOAD_WORD_COUNT,
+        block_mode: PDIBlockMode = "multiple",
+    ) -> dict[int, list[int]]:
+        """Read multiple ICE2 port PDI blocks using the backend's best strategy."""
 
 
 def validate_port(port: int) -> int:
@@ -167,6 +181,7 @@ class ICE2ModbusClient:
             timeout=config.timeout,
             retries=config.retries,
         )
+        self._last_group_signature: tuple[tuple[int, int, tuple[int, ...]], ...] | None = None
 
     def __enter__(self) -> "ICE2ModbusClient":
         self.connect()
@@ -177,17 +192,52 @@ class ICE2ModbusClient:
 
     def connect(self) -> bool:
         """Open a TCP session to the configured ICE2 target."""
-        connected = self._client.connect()
+        logger.info(
+            "Attempting Modbus TCP connection to host=%s port=%s slave_id=%s timeout=%s retries=%s",
+            self.config.host,
+            self.config.port,
+            self.config.slave_id,
+            self.config.timeout,
+            self.config.retries,
+        )
+
+        try:
+            connected = self._client.connect()
+        except Exception as error:
+            logger.warning(
+                "Modbus TCP connection attempt raised an exception for host=%s port=%s: %s",
+                self.config.host,
+                self.config.port,
+                error,
+            )
+            raise
 
         if not connected and not getattr(self._client, "connected", False):
+            logger.warning(
+                "Modbus TCP connection failed for host=%s port=%s",
+                self.config.host,
+                self.config.port,
+            )
             raise ConnectionError(
                 f"Could not connect to ICE2 at {self.config.host}:{self.config.port}"
             )
 
+        logger.info(
+            "Modbus TCP connection established to host=%s port=%s slave_id=%s",
+            self.config.host,
+            self.config.port,
+            self.config.slave_id,
+        )
         return True
 
     def close(self) -> None:
         """Close the underlying socket cleanly."""
+        logger.info(
+            "Closing Modbus TCP session for host=%s port=%s slave_id=%s",
+            self.config.host,
+            self.config.port,
+            self.config.slave_id,
+        )
         self._client.close()
 
     def read_holding_registers(self, address: int, count: int) -> list[int]:
@@ -226,3 +276,102 @@ class ICE2ModbusClient:
         base0_address = build_port_pdi_base0_address(port=port, block_mode=block_mode)
         total_words = HEADER_WORD_COUNT + payload_word_count
         return self.read_holding_registers(address=base0_address, count=total_words)
+
+    def read_all_port_pdi(
+        self,
+        ports: Sequence[int],
+        payload_word_count: int = DEFAULT_PAYLOAD_WORD_COUNT,
+        block_mode: PDIBlockMode = "multiple",
+    ) -> dict[int, list[int]]:
+        """
+        Read multiple ICE2 PDI blocks with grouped Modbus reads where possible.
+
+        The current ICE2 address map usually spreads ports far apart, so each
+        port often remains its own group. The grouping logic still prepares the
+        real path for future layouts or device variants where contiguous spans
+        can be merged safely into fewer Modbus requests.
+        """
+        if payload_word_count < 0:
+            raise ValueError("payload_word_count must be zero or greater")
+
+        unique_ports = sorted({validate_port(port) for port in ports})
+        total_words = HEADER_WORD_COUNT + payload_word_count
+
+        if not unique_ports:
+            return {}
+
+        addresses = {
+            port: build_port_pdi_base0_address(port=port, block_mode=block_mode)
+            for port in unique_ports
+        }
+        read_groups = self._build_read_groups(addresses, total_words)
+        self._log_group_plan_once(read_groups)
+
+        grouped_results: dict[int, list[int]] = {}
+
+        for group_start, group_count, group_ports in read_groups:
+            raw_registers = self.read_holding_registers(address=group_start, count=group_count)
+
+            for port in group_ports:
+                offset = addresses[port] - group_start
+                grouped_results[port] = raw_registers[offset : offset + total_words]
+
+        return grouped_results
+
+    def _build_read_groups(
+        self,
+        addresses: dict[int, int],
+        total_words: int,
+    ) -> list[tuple[int, int, list[int]]]:
+        groups: list[tuple[int, int, list[int]]] = []
+        sorted_ports = sorted(addresses)
+
+        group_ports: list[int] = []
+        group_start: int | None = None
+        group_end: int | None = None
+
+        for port in sorted_ports:
+            start = addresses[port]
+            end = start + total_words
+
+            if group_start is None or group_end is None:
+                group_ports = [port]
+                group_start = start
+                group_end = end
+                continue
+
+            candidate_count = end - group_start
+
+            if candidate_count <= MAX_MODBUS_REGISTERS_PER_READ:
+                group_ports.append(port)
+                group_end = end
+                continue
+
+            groups.append((group_start, group_end - group_start, group_ports))
+            group_ports = [port]
+            group_start = start
+            group_end = end
+
+        if group_start is not None and group_end is not None:
+            groups.append((group_start, group_end - group_start, group_ports))
+
+        return groups
+
+    def _log_group_plan_once(
+        self,
+        read_groups: Sequence[tuple[int, int, list[int]]],
+    ) -> None:
+        signature = tuple(
+            (start, count, tuple(group_ports))
+            for start, count, group_ports in read_groups
+        )
+
+        if self._last_group_signature == signature:
+            return
+
+        self._last_group_signature = signature
+        logger.info(
+            "Grouped Modbus read plan prepared: %s group(s) for ports %s",
+            len(read_groups),
+            [group_ports for _, _, group_ports in read_groups],
+        )
