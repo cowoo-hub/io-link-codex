@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# Env
+.env
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite3
+
+# Temp
+*.tmp
+
+# Build/cache
+dist/
+build/
+node_modules/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.restart-logs/
