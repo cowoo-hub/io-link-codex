@@ -27,54 +27,13 @@ interface ResolvedProcessDataProfile {
   source: ProcessDataResolutionSource
 }
 
+export const LEGACY_OMT550_DISTANCE_RECORD_PROFILE_ID = 'omt550_distance_record'
+export const OMT550_R200_IODD_PROFILE_ID = 'iodd:vendor:omt550-r200-series'
+
 const PROCESS_DATA_PROFILE_DEFINITIONS: Record<
   ProcessDataProfileId,
   ProcessDataProfileDefinition
-> = {
-  omt550_distance_record: {
-    id: 'omt550_distance_record',
-    name: 'OMT550 Distance Record',
-    description:
-      'Structured 16-bit process record with two switching outputs and one 14-bit distance field.',
-    deviceKey: 'OMT550',
-    vendorId: null,
-    deviceId: null,
-    totalBitLength: 16,
-    sourceWordCount: 1,
-    primaryFieldName: 'distance',
-    fields: [
-      {
-        name: 'switching_signal_1',
-        label: 'Switching signal 1',
-        bitOffset: 0,
-        bitLength: 1,
-        type: 'bool',
-        role: 'status',
-        description: 'Discrete switching channel 1.',
-      },
-      {
-        name: 'switching_signal_2',
-        label: 'Switching signal 2',
-        bitOffset: 1,
-        bitLength: 1,
-        type: 'bool',
-        role: 'status',
-        description: 'Discrete switching channel 2.',
-      },
-      {
-        name: 'distance',
-        label: 'Distance',
-        bitOffset: 2,
-        bitLength: 14,
-        type: 'uint',
-        role: 'primary_value',
-        unit: 'mm',
-        description: 'Primary 14-bit measured distance value.',
-        enumMappings: [{ value: 16383, label: 'No Echo' }],
-      },
-    ],
-  },
-}
+> = {}
 
 let runtimeProcessDataProfileDefinitions: Record<
   ProcessDataProfileId,
@@ -86,6 +45,20 @@ function getMergedProcessDataProfileDefinitions() {
     ...PROCESS_DATA_PROFILE_DEFINITIONS,
     ...runtimeProcessDataProfileDefinitions,
   }
+}
+
+function normalizeProcessDataProfileId(
+  profileId: ProcessDataProfileId | null | undefined,
+): ProcessDataProfileId | null {
+  if (!profileId) {
+    return null
+  }
+
+  if (profileId === LEGACY_OMT550_DISTANCE_RECORD_PROFILE_ID) {
+    return OMT550_R200_IODD_PROFILE_ID
+  }
+
+  return profileId
 }
 
 export function setRuntimeProcessDataProfiles(
@@ -345,26 +318,30 @@ function buildStatusBitsFromFields(fields: ParsedProcessDataField[]): StatusBitS
 }
 
 export function getProcessDataProfileOptions(): ProcessDataProfileSummary[] {
-  return Object.values(getMergedProcessDataProfileDefinitions()).map((profile) => ({
-    id: profile.id,
-    name: profile.name,
-    description: profile.description,
-    deviceKey: profile.deviceKey ?? null,
-    vendorId: profile.vendorId ?? null,
-    deviceId: profile.deviceId ?? null,
-    totalBitLength: profile.totalBitLength,
-    sourceWordCount: profile.sourceWordCount,
-  }))
+  return Object.values(getMergedProcessDataProfileDefinitions())
+    .filter((profile) => profile.id !== LEGACY_OMT550_DISTANCE_RECORD_PROFILE_ID)
+    .map((profile) => ({
+      id: profile.id,
+      name: profile.name,
+      description: profile.description,
+      deviceKey: profile.deviceKey ?? null,
+      vendorId: profile.vendorId ?? null,
+      deviceId: profile.deviceId ?? null,
+      totalBitLength: profile.totalBitLength,
+      sourceWordCount: profile.sourceWordCount,
+    }))
 }
 
 export function getProcessDataProfile(
   profileId: ProcessDataProfileId | null | undefined,
 ): ProcessDataProfileDefinition | null {
-  if (!profileId) {
+  const normalizedProfileId = normalizeProcessDataProfileId(profileId)
+
+  if (!normalizedProfileId) {
     return null
   }
 
-  return getMergedProcessDataProfileDefinitions()[profileId] ?? null
+  return getMergedProcessDataProfileDefinitions()[normalizedProfileId] ?? null
 }
 
 export function resolveProcessDataProfile({
@@ -385,9 +362,11 @@ export function resolveProcessDataProfile({
   }
 
   if (mode === 'profile') {
+    const normalizedRequestedProfileId = normalizeProcessDataProfileId(requestedProfileId)
+
     return {
-      profile: getProcessDataProfile(requestedProfileId),
-      source: requestedProfileId ? 'manual_selection' : 'unresolved',
+      profile: getProcessDataProfile(normalizedRequestedProfileId),
+      source: normalizedRequestedProfileId ? 'manual_selection' : 'unresolved',
     }
   }
 

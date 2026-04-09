@@ -283,25 +283,8 @@ def _build_cached_port_snapshot(
     )
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Start and stop the shared background polling worker with the app."""
-    settings = load_settings()
-    _log_runtime_dependency_status()
-    logger.info(
-        "Backend startup configuration: default_mode=%s poll_interval_ms=%s stale_after_ms=%s history_retention_ms=%s block_mode=%s payload_word_count=%s iodd_library_dir=%s",
-        settings.default_mode,
-        settings.poll_interval_ms,
-        settings.stale_after_ms,
-        settings.history_retention_ms,
-        settings.block_mode,
-        settings.payload_word_count,
-        settings.iodd_library_dir,
-    )
-    app.state.settings = settings
-    app.state.connection_config = None
-    app.state.iodd_library = IODDLibraryService(Path(settings.iodd_library_dir))
-    app.state.polling_worker = PDICacheWorker(
+def _create_polling_worker(settings: AppSettings) -> PDICacheWorker:
+    return PDICacheWorker(
         backend_factory=_create_backend,
         snapshot_builder=_build_cached_port_snapshot,
         default_mode=settings.default_mode,
@@ -315,12 +298,59 @@ async def lifespan(app: FastAPI):
         payload_word_count=settings.payload_word_count,
         block_mode=settings.block_mode,
     )
-    app.state.polling_worker.start()
+
+
+def _ensure_runtime_state(*, start_worker: bool) -> AppSettings:
+    settings = getattr(app.state, "settings", None)
+
+    if settings is None:
+        settings = load_settings()
+        _log_runtime_dependency_status()
+        logger.info(
+            "Backend startup configuration: default_mode=%s poll_interval_ms=%s stale_after_ms=%s history_retention_ms=%s block_mode=%s payload_word_count=%s iodd_library_dir=%s",
+            settings.default_mode,
+            settings.poll_interval_ms,
+            settings.stale_after_ms,
+            settings.history_retention_ms,
+            settings.block_mode,
+            settings.payload_word_count,
+            settings.iodd_library_dir,
+        )
+        app.state.settings = settings
+
+    if not hasattr(app.state, "connection_config"):
+        app.state.connection_config = None
+
+    if not hasattr(app.state, "iodd_library"):
+        app.state.iodd_library = IODDLibraryService(Path(settings.iodd_library_dir))
+
+    worker = getattr(app.state, "polling_worker", None)
+    if worker is None:
+        worker = _create_polling_worker(settings)
+        app.state.polling_worker = worker
+
+    if start_worker:
+        try:
+            worker.start()
+        except RuntimeError:
+            worker = _create_polling_worker(settings)
+            app.state.polling_worker = worker
+            worker.start()
+
+    return settings
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Start and stop the shared background polling worker with the app."""
+    _ensure_runtime_state(start_worker=True)
 
     try:
         yield
     finally:
-        app.state.polling_worker.stop()
+        polling_worker = getattr(app.state, "polling_worker", None)
+        if polling_worker is not None:
+            polling_worker.stop()
 
 
 app = FastAPI(
@@ -339,6 +369,8 @@ app = FastAPI(
 @app.middleware("http")
 async def api_prefix_compatibility_middleware(request: Request, call_next):
     """Allow the production frontend to keep calling `/api/*` without changing backend routes."""
+    _ensure_runtime_state(start_worker=True)
+
     request_path = request.scope.get("path", "")
     if request_path.startswith("/api/"):
         stripped_path = request_path[4:] or "/"
@@ -349,7 +381,7 @@ async def api_prefix_compatibility_middleware(request: Request, call_next):
 
 
 def _get_settings() -> AppSettings:
-    return app.state.settings
+    return _ensure_runtime_state(start_worker=True)
 
 
 def _get_runtime_mode() -> BackendMode:
@@ -500,6 +532,51 @@ def read_iodd_profile(profile_id: str) -> dict[str, object]:
         raise HTTPException(status_code=404, detail="IODD profile not found.")
 
     return profile
+
+
+def _delete_iodd_profile(profile_id: str) -> dict[str, object]:
+    """Delete one locally stored parsed IODD profile and its uploaded XML."""
+    try:
+        profile = app.state.iodd_library.delete_profile(profile_id)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail="IODD profile not found.") from exc
+    except OSError as exc:
+        logger.warning("IODD delete failed for profile=%s: %s", profile_id, exc)
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to delete one or more stored IODD files.",
+        ) from exc
+
+    resolved_profile_id = (
+        str(profile.get("profileId"))
+        if isinstance(profile, dict) and profile.get("profileId")
+        else profile_id
+    )
+    resolved_device_name = (
+        str(profile.get("deviceName"))
+        if isinstance(profile, dict) and profile.get("deviceName")
+        else resolved_profile_id
+    )
+
+    return {
+        "deleted": True,
+        "profileId": resolved_profile_id,
+        "profile": profile,
+        "message": f"Deleted {resolved_device_name} from the IODD library.",
+        "count": len(app.state.iodd_library.list_profiles()),
+    }
+
+
+@app.delete("/iodd/library/{profile_id}")
+def delete_iodd_profile(profile_id: str) -> dict[str, object]:
+    """Delete one locally stored parsed IODD profile and its uploaded XML."""
+    return _delete_iodd_profile(profile_id)
+
+
+@app.post("/iodd/library/{profile_id}/delete")
+def delete_iodd_profile_compat(profile_id: str) -> dict[str, object]:
+    """Compatibility delete route for runtimes that do not forward DELETE reliably."""
+    return _delete_iodd_profile(profile_id)
 
 
 @app.post("/iodd/library/upload")

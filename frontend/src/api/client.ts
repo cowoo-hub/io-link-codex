@@ -21,6 +21,7 @@ import type {
   PortDisplayConfig,
   PortSeverity,
   DiagnosticLevel,
+  IoddDeleteResponse,
 } from './types'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') ?? '/api'
@@ -183,6 +184,30 @@ export async function uploadIoddFile(file: File): Promise<IoddUploadResponse> {
   }
 
   return body as IoddUploadResponse
+}
+
+export async function deleteIoddProfile(
+  profileId: string,
+): Promise<IoddDeleteResponse> {
+  const encodedProfileId = encodeURIComponent(profileId)
+
+  try {
+    return await request<IoddDeleteResponse>(`/iodd/library/${encodedProfileId}`, {
+      method: 'DELETE',
+    })
+  } catch (error) {
+    const message = error instanceof Error ? error.message.toLowerCase() : ''
+    const shouldRetryWithPost =
+      message.includes('405') || message.includes('method not allowed')
+
+    if (!shouldRetryWithPost) {
+      throw error
+    }
+
+    return request<IoddDeleteResponse>(`/iodd/library/${encodedProfileId}/delete`, {
+      method: 'POST',
+    })
+  }
 }
 
 export async function connectTarget(

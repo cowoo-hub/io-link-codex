@@ -18,7 +18,6 @@ from modbus_core import (
 
 SIM_WARNING_EVENT = 0x7001
 SIM_VIBRATION_WARNING_EVENT = 0x7012
-SIM_MAJOR_FAULT_EVENT = 0x8F10
 SIMULATOR_BOOT_TIME = time.monotonic()
 
 
@@ -170,7 +169,7 @@ class ICE2Simulator:
         if port == 5:
             return self._profile_warning_case(elapsed)
         if port == 6:
-            return self._profile_major_fault()
+            return self._profile_distance_monitor(elapsed)
         if port == 7:
             return self._profile_power_monitor(elapsed)
         return self._profile_vibration_watch(elapsed)
@@ -293,24 +292,26 @@ class ICE2Simulator:
             payload_words=payload,
         )
 
-    def _profile_major_fault(self) -> SimulatedPortFrame:
+    def _profile_distance_monitor(self, elapsed: float) -> SimulatedPortFrame:
+        distance_mm = 420 + int(34 * math.sin(elapsed / 2.6))
+        signal_quality = 94 + int(3 * math.cos(elapsed / 5.8))
         payload = (
-            _pack_uint16(0)
-            + _pack_uint16(0)
+            _pack_uint16(distance_mm)
+            + _pack_uint16(signal_quality)
             + _pack_uint16(6)
-            + _pack_uint16(0xDEAD)
-            + _pack_uint16(0x0000)
+            + _pack_uint16(0x6006)
+            + _pack_uint16(0x0001)
         )
 
         return SimulatedPortFrame(
             status_byte=_build_status_byte(
-                initialization_active=False,
-                operational=False,
-                pdi_valid=False,
-                fault=True,
+                initialization_active=True,
+                operational=True,
+                pdi_valid=True,
+                fault=False,
             ),
             auxiliary_input=0x00,
-            event_code=SIM_MAJOR_FAULT_EVENT,
+            event_code=0x0000,
             payload_words=payload,
         )
 

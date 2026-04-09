@@ -160,6 +160,12 @@ function PortDisplayControls({
   const [customPresets, setCustomPresets] = useState(() => loadCustomProfilePresets())
   const isCompact = variant === 'compact'
   const processDataProfileOptions = getProcessDataProfileOptions()
+  const compactSelectProps = isCompact
+    ? {
+        triggerClassName: 'stable-select__trigger--compact',
+        menuClassName: 'stable-select__menu--compact',
+      }
+    : {}
 
   const presetOptions = useMemo(
     () => [...getBuiltInProfilePresets(), ...customPresets],
@@ -379,6 +385,7 @@ function PortDisplayControls({
               {isCompact ? 'Port' : 'Selected port'}
             </span>
             <StableSelect
+              {...compactSelectProps}
               value={String(selectedPortNumber)}
               onChange={(nextValue) =>
                 onSelectedPortNumberChange(Number(nextValue))
@@ -405,6 +412,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">Profile</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedProfileValue}
             onChange={(nextValue) => {
               if (nextValue === 'generic') {
@@ -428,6 +436,7 @@ function PortDisplayControls({
             {isCompact ? 'Decode' : 'Preferred decode'}
           </span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedDecodeValue}
             onChange={(nextValue) =>
               updateOverride({ preferredDecodeType: nextValue as DecodeType })
@@ -439,6 +448,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">Resolution</span>
           <StableSelect
+            {...compactSelectProps}
             value={String(selectedResolutionValue)}
             onChange={(nextValue) =>
               updateOverride({
@@ -455,6 +465,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">{isCompact ? 'Words' : 'Word order'}</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedWordOrderValue}
             onChange={(nextValue) =>
               updateOverride({ wordOrder: nextValue as WordOrder })
@@ -466,6 +477,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">{isCompact ? 'Bytes' : 'Byte order'}</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedByteOrderValue}
             onChange={(nextValue) =>
               updateOverride({ byteOrder: nextValue as ByteOrder })
@@ -488,6 +500,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">{isCompact ? 'Field' : 'Field mode'}</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedFieldModeValue}
             onChange={(nextValue) => {
               const nextFieldMode = nextValue as FieldMode
@@ -516,6 +529,7 @@ function PortDisplayControls({
             {isCompact ? 'Source' : 'Source words'}
           </span>
           <StableSelect
+            {...compactSelectProps}
             value={String(selectedSourceWordCountValue)}
             onChange={(nextValue) => updateOverride({ sourceWordCount: Number(nextValue) })}
             options={sourceWordOptions.map((option) => ({
@@ -528,6 +542,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">{isCompact ? 'PDI mode' : 'Process-data mode'}</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedProcessDataModeValue}
             onChange={(nextValue) =>
               updateOverride({
@@ -541,6 +556,7 @@ function PortDisplayControls({
         <label className="control-field">
           <span className="control-field__label">{isCompact ? 'PDI map' : 'Process-data map'}</span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedProcessDataProfileValue}
             onChange={(nextValue) => {
               if (!nextValue) {
@@ -576,6 +592,7 @@ function PortDisplayControls({
             {isCompact ? 'Signed' : 'Signedness'}
           </span>
           <StableSelect
+            {...compactSelectProps}
             value={selectedSignedValue}
             onChange={(nextValue) => updateOverride({ signed: nextValue === 'signed' })}
             options={[
@@ -649,6 +666,7 @@ function PortDisplayControls({
           <label className="control-field profile-preset-strip__field">
             <span className="control-field__label">{isCompact ? 'Preset' : 'Preset library'}</span>
             <StableSelect
+              {...compactSelectProps}
               value={presetSelectionValue}
               onChange={(nextValue) => setSelectedPresetId(nextValue)}
               options={[

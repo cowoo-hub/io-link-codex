@@ -163,6 +163,10 @@ function StableSelect({
     setMenuPosition(null)
   }, [])
 
+  const updateMenuPositionFromDom = useCallback(() => {
+    updateMenuPosition(menuRef.current?.getBoundingClientRect().height)
+  }, [updateMenuPosition])
+
   const openMenu = useCallback(() => {
     if (disabled || options.length === 0) {
       return
@@ -199,31 +203,25 @@ function StableSelect({
   )
 
   useLayoutEffect(() => {
-    if (!isOpen || !menuPosition || !menuRef.current) {
+    if (!isOpen) {
       return
     }
 
     const frameId = window.requestAnimationFrame(() => {
-      const measuredMenuHeight = menuRef.current?.getBoundingClientRect().height
-
-      if (!measuredMenuHeight) {
-        return
-      }
-
-      updateMenuPosition(measuredMenuHeight)
+      updateMenuPositionFromDom()
     })
 
     return () => {
       window.cancelAnimationFrame(frameId)
     }
-  }, [isOpen, menuPosition, updateMenuPosition])
+  }, [isOpen, options, updateMenuPositionFromDom, value])
 
   useEffect(() => {
     if (!isOpen) {
       return
     }
 
-    const handlePointerDown = (event: MouseEvent) => {
+    const handlePointerDown = (event: PointerEvent) => {
       const targetNode = event.target as Node | null
 
       if (
@@ -247,22 +245,44 @@ function StableSelect({
       }
     }
 
-    const handleViewportChange = () => {
-      closeMenu()
+    const handleViewportChange = (event?: Event) => {
+      const targetNode = event?.target instanceof Node ? event.target : null
+
+      if (targetNode && menuRef.current?.contains(targetNode)) {
+        return
+      }
+
+      updateMenuPositionFromDom()
     }
 
-    document.addEventListener('mousedown', handlePointerDown)
+    const resizeObserver =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver(() => {
+            updateMenuPositionFromDom()
+          })
+
+    if (triggerRef.current) {
+      resizeObserver?.observe(triggerRef.current)
+    }
+
+    if (menuRef.current) {
+      resizeObserver?.observe(menuRef.current)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
     document.addEventListener('focusin', handleFocusIn)
     window.addEventListener('resize', handleViewportChange)
     window.addEventListener('scroll', handleViewportChange, true)
 
     return () => {
-      document.removeEventListener('mousedown', handlePointerDown)
+      resizeObserver?.disconnect()
+      document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('focusin', handleFocusIn)
       window.removeEventListener('resize', handleViewportChange)
       window.removeEventListener('scroll', handleViewportChange, true)
     }
-  }, [closeMenu, isOpen])
+  }, [closeMenu, isOpen, updateMenuPositionFromDom])
 
   useEffect(() => {
     if (!isOpen || activeIndex < 0) {
@@ -380,7 +400,11 @@ function StableSelect({
                   data-option-index={index}
                   className={`stable-select__option ${isSelected ? 'stable-select__option--selected' : ''} ${isActive ? 'stable-select__option--active' : ''}`.trim()}
                   disabled={option.disabled}
+                  onMouseDown={(event) => {
+                    event.preventDefault()
+                  }}
                   onMouseEnter={() => setActiveIndex(index)}
+                  onMouseMove={() => setActiveIndex(index)}
                   onClick={() => commitSelection(index)}
                 >
                   <span className="stable-select__option-copy">

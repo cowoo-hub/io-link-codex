@@ -913,6 +913,28 @@ class IODDLibraryService:
     def get_profile(self, profile_id: str) -> dict[str, Any] | None:
         return self._load_profile_from_storage(_slugify(profile_id))
 
+    def delete_profile(self, profile_id: str) -> dict[str, Any] | None:
+        profile_slug = _slugify(profile_id)
+        json_path = self._storage_dir / f"{profile_slug}.json"
+        xml_path = self._storage_dir / f"{profile_slug}.xml"
+        stored_profile = self._load_profile_from_storage(profile_slug)
+
+        if not json_path.exists() and not xml_path.exists():
+            raise FileNotFoundError(f"IODD profile '{profile_id}' was not found.")
+
+        for profile_path in (json_path, xml_path):
+            if not profile_path.exists():
+                continue
+
+            try:
+                profile_path.unlink()
+            except OSError as exc:
+                logger.warning("Failed to delete IODD profile artifact '%s': %s", profile_path, exc)
+                raise
+
+        logger.info("Deleted IODD profile: profile_id=%s", profile_id)
+        return stored_profile
+
     def save_uploaded_xml(self, *, file_name: str, xml_bytes: bytes) -> dict[str, Any]:
         if not file_name.lower().endswith(".xml"):
             raise ValueError("Only XML IODD uploads are supported in this first pass.")

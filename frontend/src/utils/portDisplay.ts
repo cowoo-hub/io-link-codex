@@ -13,10 +13,119 @@ import type {
   StatusBitDefinition,
   WordOrder,
 } from '../api/types'
-import { getProcessDataProfile } from './processDataMaps'
+import {
+  getProcessDataProfile,
+  LEGACY_OMT550_DISTANCE_RECORD_PROFILE_ID,
+  OMT550_R200_IODD_PROFILE_ID,
+} from './processDataMaps'
 
 const STORAGE_KEY = 'ice2-port-display-overrides:v3'
 const PRESET_STORAGE_KEY = 'ice2-port-display-presets:v1'
+
+function isLegacyPort6DefaultOverride(
+  portNumber: number,
+  override: PortDisplayOverride,
+): boolean {
+  if (portNumber !== 6) {
+    return false
+  }
+
+  return (
+    override.processDataMode === 'profile' &&
+    override.processDataProfileId === OMT550_R200_IODD_PROFILE_ID &&
+    override.preferredDecodeType === 'uint16' &&
+    override.sourceWordCount === 1 &&
+    override.fieldMode === 'bit_field' &&
+    override.bitOffset === 2 &&
+    override.bitLength === 14 &&
+    override.signed === false &&
+    override.sentinelMappings?.length === 1 &&
+    override.sentinelMappings[0]?.value === 16383 &&
+    override.sentinelMappings[0]?.label === 'No Echo' &&
+    override.statusBits?.length === 2 &&
+    override.statusBits[0]?.bit === 0 &&
+    override.statusBits[0]?.label === 'Switching signal 1' &&
+    override.statusBits[1]?.bit === 1 &&
+    override.statusBits[1]?.label === 'Switching signal 2' &&
+    override.label === undefined &&
+    override.profileId === undefined &&
+    override.engineeringUnit === undefined &&
+    override.wordOrder === undefined &&
+    override.byteOrder === undefined &&
+    override.resolutionFactor === undefined
+  )
+}
+
+function isLegacyPort3DefaultOverride(
+  portNumber: number,
+  override: PortDisplayOverride,
+): boolean {
+  if (portNumber !== 3) {
+    return false
+  }
+
+  const hasCompatibleLabel =
+    override.label === undefined || override.label.trim() === '' || override.label === 'Counter 3'
+  const hasCompatibleProfile = override.profileId === undefined || override.profileId === 'counter'
+  const hasCompatibleEngineeringUnit =
+    override.engineeringUnit === undefined || override.engineeringUnit === 'cts'
+  const hasCompatibleDecodeType =
+    override.preferredDecodeType === undefined || override.preferredDecodeType === 'uint32'
+  const hasCompatibleWordOrder =
+    override.wordOrder === undefined || override.wordOrder === 'big'
+  const hasCompatibleByteOrder =
+    override.byteOrder === undefined || override.byteOrder === 'big'
+  const hasCompatibleResolution =
+    override.resolutionFactor === undefined || override.resolutionFactor === 1
+  const hasCompatibleSourceWords =
+    override.sourceWordCount === undefined || override.sourceWordCount === 2
+  const hasCompatibleFieldMode =
+    override.fieldMode === undefined || override.fieldMode === 'full_word'
+  const hasCompatibleBitOffset = override.bitOffset === undefined || override.bitOffset === 0
+  const hasCompatibleBitLength = override.bitLength === undefined || override.bitLength === 16
+  const hasCompatibleSigned = override.signed === undefined || override.signed === false
+  const hasCompatibleProcessDataMode =
+    override.processDataMode === undefined || override.processDataMode === 'manual'
+  const hasCompatibleProcessDataProfile =
+    override.processDataProfileId === undefined || override.processDataProfileId === null
+  const hasCompatibleSentinelMappings =
+    override.sentinelMappings === undefined || override.sentinelMappings.length === 0
+  const hasCompatibleStatusBits =
+    override.statusBits === undefined || override.statusBits.length === 0
+
+  return (
+    hasCompatibleLabel &&
+    hasCompatibleProfile &&
+    hasCompatibleEngineeringUnit &&
+    hasCompatibleDecodeType &&
+    hasCompatibleWordOrder &&
+    hasCompatibleByteOrder &&
+    hasCompatibleResolution &&
+    hasCompatibleSourceWords &&
+    hasCompatibleFieldMode &&
+    hasCompatibleBitOffset &&
+    hasCompatibleBitLength &&
+    hasCompatibleSigned &&
+    hasCompatibleProcessDataMode &&
+    hasCompatibleProcessDataProfile &&
+    hasCompatibleSentinelMappings &&
+    hasCompatibleStatusBits
+  )
+}
+
+function normalizeLegacyProcessDataProfileId(
+  profileId: ProcessDataProfileId | null | undefined,
+): ProcessDataProfileId | null {
+  if (!profileId) {
+    return null
+  }
+
+  if (profileId === LEGACY_OMT550_DISTANCE_RECORD_PROFILE_ID) {
+    return OMT550_R200_IODD_PROFILE_ID
+  }
+
+  return profileId
+}
 
 interface PortProfileDefinition {
   id: PortProfileId
@@ -231,23 +340,7 @@ const PORT_PROFILE_DEFINITIONS: Record<PortProfileId, PortProfileDefinition> = {
   },
 }
 
-const PORT_DEFAULT_OVERRIDES: Partial<Record<number, PortDisplayOverride>> = {
-  6: {
-    processDataMode: 'profile',
-    processDataProfileId: 'omt550_distance_record',
-    preferredDecodeType: 'uint16',
-    sourceWordCount: 1,
-    fieldMode: 'bit_field',
-    bitOffset: 2,
-    bitLength: 14,
-    signed: false,
-    sentinelMappings: [{ value: 16383, label: 'No Echo' }],
-    statusBits: [
-      { bit: 0, label: 'Switching signal 1' },
-      { bit: 1, label: 'Switching signal 2' },
-    ],
-  },
-}
+const PORT_DEFAULT_OVERRIDES: Partial<Record<number, PortDisplayOverride>> = {}
 
 const BUILT_IN_PROFILE_PRESETS: PortDisplayPreset[] = [
   {
@@ -291,8 +384,8 @@ const BUILT_IN_PROFILE_PRESETS: PortDisplayPreset[] = [
         { bit: 1, label: 'Switching signal 2' },
       ],
       engineeringUnit: 'mm',
-      processDataMode: 'profile',
-      processDataProfileId: 'omt550_distance_record',
+      processDataMode: 'manual',
+      processDataProfileId: null,
     },
   },
   {
@@ -495,7 +588,9 @@ function sanitizeOverride(value: unknown): PortDisplayOverride | null {
     if (candidate.processDataProfileId === null) {
       override.processDataProfileId = null
     } else if (isProcessDataProfileId(candidate.processDataProfileId)) {
-      override.processDataProfileId = candidate.processDataProfileId
+      override.processDataProfileId = normalizeLegacyProcessDataProfileId(
+        candidate.processDataProfileId,
+      )
     }
   }
 
@@ -783,7 +878,14 @@ export function loadPortDisplayOverrides(): PortDisplayOverrides {
       const portNumber = Number(portKey)
       const sanitized = sanitizeOverride(rawOverride)
 
-      if (Number.isInteger(portNumber) && portNumber >= 1 && portNumber <= 8 && sanitized) {
+      if (
+        Number.isInteger(portNumber) &&
+        portNumber >= 1 &&
+        portNumber <= 8 &&
+        sanitized &&
+        !isLegacyPort6DefaultOverride(portNumber, sanitized) &&
+        !isLegacyPort3DefaultOverride(portNumber, sanitized)
+      ) {
         overrides[portNumber] = sanitized
       }
     }
@@ -824,7 +926,9 @@ export function resolvePortDisplayConfig(
   const bitLength = effectiveOverride?.bitLength ?? profile.defaultBitLength
   const signed = effectiveOverride?.signed ?? profile.defaultSigned
   const processDataMode = effectiveOverride?.processDataMode ?? 'manual'
-  const processDataProfileId = effectiveOverride?.processDataProfileId ?? null
+  const processDataProfileId = normalizeLegacyProcessDataProfileId(
+    effectiveOverride?.processDataProfileId ?? null,
+  )
   const activeProcessDataProfile =
     processDataMode === 'profile' && processDataProfileId
       ? getProcessDataProfile(processDataProfileId)

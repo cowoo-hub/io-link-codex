@@ -458,6 +458,14 @@ export interface IoddUploadResponse {
   count: number
 }
 
+export interface IoddDeleteResponse {
+  deleted: boolean
+  profileId: string
+  profile: IoddDeviceProfile | null
+  message: string
+  count: number
+}
+
 export interface PortDisplayOverride {
   label?: string
   profileId?: PortProfileId

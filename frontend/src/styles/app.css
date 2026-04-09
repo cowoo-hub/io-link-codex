@@ -297,14 +297,23 @@ select:disabled {
 
 .stable-select__menu--compact {
   padding: 0.22rem;
+  font-size: 0.72rem;
 }
 
 .stable-select__menu--compact .stable-select__option {
   padding: 0.28rem 0.34rem;
 }
 
+.stable-select__menu--compact .stable-select__option-label {
+  line-height: 1.14;
+}
+
 .stable-select__menu--compact .stable-select__option-meta {
   font-size: 0.62rem;
+}
+
+.stable-select__menu--compact .stable-select__option-check {
+  font-size: 0.52rem;
 }
 
 code {
@@ -320,41 +329,6 @@ code {
   height: var(--app-viewport-height);
   min-height: var(--app-viewport-height);
   overflow: hidden;
-}
-
-.app-credit {
-  position: fixed;
-  left: calc(var(--shell-pad) + 2px);
-  bottom: calc(var(--shell-pad) + 1px);
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
-  max-width: calc(var(--rail-width) - (var(--shell-pad) * 2) - 6px);
-  padding: 0.16rem 0.38rem;
-  border-radius: 999px;
-  border: 1px solid rgba(120, 179, 235, 0.1);
-  background: rgba(8, 14, 21, 0.38);
-  color: rgba(192, 213, 235, 0.74);
-  font-size: 0.72rem;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
-  transition:
-    color 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease,
-    opacity 180ms ease;
-}
-
-.app-credit:hover {
-  color: rgba(218, 236, 255, 0.9);
-  border-color: rgba(100, 220, 255, 0.18);
-  background: rgba(10, 18, 27, 0.52);
 }
 
 .app-rail {
@@ -458,11 +432,11 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 76px;
-  padding: 0.46rem 0.54rem;
+  min-height: 118px;
+  padding: 0.56rem;
   background:
-    linear-gradient(160deg, rgba(24, 35, 47, 0.98), rgba(16, 24, 34, 0.92)),
-    radial-gradient(circle at top left, rgba(100, 220, 255, 0.16), transparent 42%);
+    linear-gradient(180deg, rgba(21, 31, 42, 0.96), rgba(15, 23, 32, 0.92)),
+    radial-gradient(circle at 18% 14%, rgba(100, 220, 255, 0.075), transparent 36%);
 }
 
 .rail-brand__logo-shell {
@@ -470,17 +444,25 @@ code {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 46px;
+  min-height: 100px;
+  padding: 0.52rem 0.46rem;
+  border-radius: calc(var(--radius-lg) - 2px);
+  background:
+    linear-gradient(180deg, rgba(14, 22, 31, 0.92), rgba(11, 17, 24, 0.9)),
+    radial-gradient(circle at 18% 12%, rgba(100, 220, 255, 0.055), transparent 34%);
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 1px 0 rgba(0, 0, 0, 0.12);
 }
 
 .rail-brand__logo {
   display: block;
-  width: min(156px, 100%);
+  width: min(174px, 100%);
+  max-height: 94px;
   height: auto;
   object-fit: contain;
-  filter:
-    drop-shadow(0 0 14px rgba(100, 220, 255, 0.1))
-    drop-shadow(0 0 22px rgba(125, 255, 217, 0.05));
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
 }
 
 .rail-brand__title {
@@ -595,6 +577,60 @@ code {
   font-family: var(--mono);
   font-size: 0.9rem;
   font-variant-numeric: tabular-nums;
+}
+
+.app-footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.52rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.48rem 0.58rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(14, 21, 29, 0.84), rgba(10, 16, 24, 0.8)),
+    radial-gradient(circle at 12% 0%, rgba(100, 220, 255, 0.045), transparent 34%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+}
+
+.app-footer__linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  color: #0a66c2;
+  background: rgba(8, 14, 21, 0.58);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.app-footer__linkedin:hover {
+  transform: translateY(-1px);
+  color: var(--text-strong);
+  background: rgba(10, 18, 27, 0.82);
+}
+
+.app-footer__text {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--neutral);
+  font-size: 0.7rem;
+  line-height: 1.28;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
 }
 
 .workspace-shell {
@@ -775,19 +811,23 @@ code {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-height: 26px;
-  padding-inline: 0.04rem;
+  min-height: 30px;
+  padding: 0.08rem 0.18rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  background:
+    linear-gradient(180deg, rgba(11, 18, 26, 0.72), rgba(8, 14, 21, 0.62)),
+    radial-gradient(circle at 14% 0%, rgba(100, 220, 255, 0.035), transparent 28%);
 }
 
 .connection-bar__logo {
   display: block;
-  width: min(80px, 100%);
-  height: auto;
+  width: auto;
+  max-width: 92px;
+  height: 26px;
   object-fit: contain;
   background: transparent;
-  filter:
-    drop-shadow(0 0 10px rgba(100, 220, 255, 0.07))
-    drop-shadow(0 0 14px rgba(125, 255, 217, 0.03));
+  filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.16));
 }
 
 .connection-bar__mode-field,
@@ -958,21 +998,22 @@ code {
 
 .thin-intelligence-bar__brand {
   justify-content: flex-start;
-  padding-inline: 0.12rem 0.18rem;
-  border-color: transparent;
-  background: transparent;
-  box-shadow: none;
+  padding-inline: 0.18rem 0.22rem;
+  border-color: rgba(255, 255, 255, 0.045);
+  background:
+    linear-gradient(180deg, rgba(11, 18, 26, 0.72), rgba(8, 14, 21, 0.62)),
+    radial-gradient(circle at 14% 0%, rgba(100, 220, 255, 0.035), transparent 28%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 .thin-intelligence-bar__logo {
   display: block;
-  width: min(82px, 100%);
-  height: auto;
+  width: auto;
+  max-width: 92px;
+  height: 26px;
   object-fit: contain;
   background: transparent;
-  filter:
-    drop-shadow(0 0 12px rgba(100, 220, 255, 0.08))
-    drop-shadow(0 0 18px rgba(125, 255, 217, 0.04));
+  filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.16));
 }
 
 .thin-intelligence-bar__item--value {
@@ -1355,6 +1396,15 @@ code {
 
 .action-button--ghost {
   background: rgba(6, 10, 15, 0.82);
+}
+
+.action-button--critical {
+  border-color: rgba(255, 109, 134, 0.34);
+  background:
+    linear-gradient(135deg, rgba(58, 18, 29, 0.98), rgba(28, 10, 16, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 109, 134, 0.08),
+    0 0 20px rgba(255, 109, 134, 0.1);
 }
 
 .system-banner {
@@ -2042,6 +2092,8 @@ code {
   align-items: stretch;
   width: 100%;
   min-width: 0;
+  padding: 0.04rem 0.02rem 0.02rem;
+  box-sizing: border-box;
 }
 
 .monitor-card__trend > * {
@@ -2554,6 +2606,56 @@ code {
   overflow-wrap: anywhere;
 }
 
+.app-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3400;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(4, 9, 14, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.app-dialog {
+  width: min(540px, calc(100vw - 2rem));
+  display: grid;
+  gap: 0.52rem;
+  padding: 0.82rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid rgba(136, 186, 236, 0.22);
+  background:
+    linear-gradient(180deg, rgba(18, 27, 37, 0.98), rgba(10, 17, 26, 0.98)),
+    radial-gradient(circle at top left, rgba(100, 220, 255, 0.08), transparent 42%);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.34);
+}
+
+.app-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.app-dialog__body {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.42;
+}
+
+.app-dialog__body strong {
+  color: var(--text-strong);
+}
+
+.app-dialog__details {
+  gap: 0.08rem;
+}
+
+.app-dialog__actions {
+  justify-content: flex-end;
+}
+
 .iodd-detail-panel {
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
@@ -2724,7 +2826,7 @@ code {
 }
 
 .control-panel--profile-dock .control-field__label {
-  font-size: 0.54rem;
+  font-size: 0.5rem;
   line-height: 1.1;
 }
 
@@ -2733,7 +2835,7 @@ code {
 .control-panel--profile-dock .stable-select__trigger {
   min-height: 22px;
   padding: 0.1rem 0.22rem;
-  font-size: 0.64rem;
+  font-size: 0.6rem;
 }
 
 .control-panel--profile-dock .customizing-map {
@@ -2763,7 +2865,7 @@ code {
 .control-panel--profile-dock .profile-preset-strip .action-button--compact {
   min-height: 22px;
   padding: 0.08rem 0.3rem;
-  font-size: 0.62rem;
+  font-size: 0.58rem;
 }
 
 .control-panel--profile-dock .control-panel__footer {
@@ -3826,6 +3928,7 @@ code {
   display: block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .trend-sparkline__grid-line {
@@ -3921,12 +4024,14 @@ code {
   height: 100%;
   width: 100%;
   min-width: 0;
-  padding: 0;
+  padding: 0.14rem;
+  box-sizing: border-box;
   gap: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   background: transparent;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .trend-sparkline--card::after,
@@ -3941,7 +4046,10 @@ code {
   max-height: none;
   width: 100%;
   min-width: 0;
-  border: 0;
+  height: 100%;
+  padding: 0.22rem 0.3rem 0.18rem;
+  box-sizing: border-box;
+  border: 1px solid rgba(120, 179, 235, 0.08);
   border-radius: 12px;
   background:
     linear-gradient(180deg, rgba(96, 208, 255, 0.038), rgba(10, 18, 28, 0.045) 58%, rgba(8, 15, 23, 0.12)),
@@ -4726,11 +4834,6 @@ code {
     min-height: calc(100dvh - 180px);
   }
 
-  .app-credit {
-    left: 0.9rem;
-    bottom: 0.9rem;
-  }
-
   .monitor-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -4840,9 +4943,12 @@ code {
     padding: 1rem;
   }
 
-  .app-credit {
+  .app-footer {
+    padding: 0.42rem 0.54rem;
+  }
+
+  .app-footer__text {
     font-size: 0.74rem;
-    padding: 0.16rem 0.4rem;
   }
 
   .page-header,
@@ -4957,6 +5063,17 @@ code {
     grid-template-columns: 1fr;
     grid-template-rows: none;
     height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-footer {
+    align-items: start;
+    max-width: 100%;
+  }
+
+  .app-footer__text {
+    font-size: 0.72rem;
   }
 }
 

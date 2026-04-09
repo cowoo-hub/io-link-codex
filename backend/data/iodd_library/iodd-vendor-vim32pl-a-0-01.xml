@@ -1,0 +1,2142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<IODevice xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+  <DocumentInfo version="V1.01.000" releaseDate="2024-09-17" copyright="Copyright 2024, Pepperl+Fuchs SE"/>
+  <ProfileHeader>
+    <ProfileIdentification>IO Device Profile</ProfileIdentification>
+    <ProfileRevision>1.1</ProfileRevision>
+    <ProfileName>Device Profile for IO Devices</ProfileName>
+    <ProfileSource>IO-Link Consortium</ProfileSource>
+    <ProfileClassID>Device</ProfileClassID>
+    <ISO15745Reference>
+      <ISO15745Part>1</ISO15745Part>
+      <ISO15745Edition>1</ISO15745Edition>
+      <ProfileTechnology>IODD</ProfileTechnology>
+    </ISO15745Reference>
+  </ProfileHeader>
+  <ProfileBody>
+    <!-- VIM32PL-*A*-0*-*01  DeviceID 0x510001 -->
+    <DeviceIdentity vendorId="1" deviceId="5308417" vendorName="Pepperl+Fuchs">
+      <VendorText textId="T_VendorText"/>
+      <VendorUrl textId="T_VendorUrl"/>
+      <VendorLogo name="Pepperl-Fuchs-logo.png"/>
+      <DeviceName textId="T_DeviceName"/>
+      <DeviceFamily textId="T_DeviceFamily"/>
+      <DeviceVariantCollection>
+        <DeviceVariant productId="70140695-100001" deviceSymbol="Pepperl-Fuchs-VIM3-pic.png" deviceIcon="Pepperl-Fuchs-VIM3-icon.png">
+          <Name textId="TN_ProductName_70140695-100001"/>
+          <Description textId="TD_ProductDescr_70140695-100001"/>
+        </DeviceVariant>
+      </DeviceVariantCollection>
+    </DeviceIdentity>
+    <DeviceFunction>
+      <Features blockParameter="true" dataStorage="true" profileCharacteristic="16384 33026">
+        <SupportedAccessLocks parameter="false" dataStorage="false" localParameterization="false" localUserInterface="false"/>
+      </Features>
+      <DatatypeCollection>
+        <Datatype id="D_XPFV_SSC10_SetpointI32" xsi:type="IntegerT" bitLength="32">
+          <ValueRange lowerValue="0" upperValue="12800"/>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC20_SetpointI32" xsi:type="IntegerT" bitLength="32">
+          <ValueRange lowerValue="0" upperValue="1000"/>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC30_SetpointI32" xsi:type="IntegerT" bitLength="32">
+          <ValueRange lowerValue="0" upperValue="1400"/>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC40_SetpointI32" xsi:type="IntegerT" bitLength="32">
+          <ValueRange lowerValue="-50" upperValue="100"/>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC10_ParamST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC10_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP1"/>
+            <Description textId="TD_V_XPFS_SSC_SP1"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC10_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP2"/>
+            <Description textId="TD_V_XPFS_SSC_SP2"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC20_ParamST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC20_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP1"/>
+            <Description textId="TD_V_XPFS_SSC_SP1"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC20_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP2"/>
+            <Description textId="TD_V_XPFS_SSC_SP2"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC30_ParamST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC30_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP1"/>
+            <Description textId="TD_V_XPFS_SSC_SP1"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC30_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP2"/>
+            <Description textId="TD_V_XPFS_SSC_SP2"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC40_ParamST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC40_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP1"/>
+            <Description textId="TD_V_XPFS_SSC_SP1"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC40_SetpointI32"/>
+            <Name textId="TN_V_XPFS_SSC_SP2"/>
+            <Description textId="TD_V_XPFS_SSC_SP2"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_LogicU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_SSC_Logic_highactive"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFS_SSC_Logic_lowactive"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_ModeU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_SSC_Mode_deactivated"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFS_SSC_Mode_singlepoint"/>
+          </SingleValue>
+          <SingleValue value="2">
+            <Name textId="TN_SV_XPFS_SSC_Mode_window"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_HysteresisI32" xsi:type="IntegerT" bitLength="32">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_SSC_Hysteresis_fix"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC10_ConfigST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFV_SSC_LogicU8"/>
+            <Name textId="TN_V_XPFS_SSC_Logic"/>
+            <Description textId="TD_V_XPFS_SSC_Logic"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC_ModeU8"/>
+            <Name textId="TN_V_XPFS_SSC_Mode"/>
+            <Description textId="TD_V_XPFS_SSC_Mode"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC_HysteresisI32"/>
+            <Name textId="TN_V_XPFS_SSC_Hysteresis"/>
+            <Description textId="TD_V_XPFS_SSC_Hysteresis"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC20_ConfigST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFV_SSC_LogicU8"/>
+            <Name textId="TN_V_XPFS_SSC_Logic"/>
+            <Description textId="TD_V_XPFS_SSC_Logic"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC_ModeU8"/>
+            <Name textId="TN_V_XPFS_SSC_Mode"/>
+            <Description textId="TD_V_XPFS_SSC_Mode"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC_HysteresisI32"/>
+            <Name textId="TN_V_XPFS_SSC_Hysteresis"/>
+            <Description textId="TD_V_XPFS_SSC_Hysteresis"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC30_ConfigST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFV_SSC_LogicU8"/>
+            <Name textId="TN_V_XPFS_SSC_Logic"/>
+            <Description textId="TD_V_XPFS_SSC_Logic"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC_ModeU8"/>
+            <Name textId="TN_V_XPFS_SSC_Mode"/>
+            <Description textId="TD_V_XPFS_SSC_Mode"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC_HysteresisI32"/>
+            <Name textId="TN_V_XPFS_SSC_Hysteresis"/>
+            <Description textId="TD_V_XPFS_SSC_Hysteresis"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC40_ConfigST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFV_SSC_LogicU8"/>
+            <Name textId="TN_V_XPFS_SSC_Logic"/>
+            <Description textId="TD_V_XPFS_SSC_Logic"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC_ModeU8"/>
+            <Name textId="TN_V_XPFS_SSC_Mode"/>
+            <Description textId="TD_V_XPFS_SSC_Mode"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="32">
+              <ValueRange lowerValue="0" upperValue="20"/>
+            </SimpleDatatype>
+            <Name textId="TN_V_XPFS_SSC_Hysteresis"/>
+            <Description textId="TD_V_XPFS_SSC_Hysteresis"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_OffDelayU16" xsi:type="UIntegerT" bitLength="16">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_disabled"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="60000"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Eval_FilterVIMPLAU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Eval_Filter_10to1000hz"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFV_Eval_Filter_10to500hz"/>
+          </SingleValue>
+          <SingleValue value="2">
+            <Name textId="TN_SV_XPFV_Eval_Filter_10to100hz"/>
+          </SingleValue>
+          <SingleValue value="3">
+            <Name textId="TN_SV_XPFV_Eval_Filter_10to50hz"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_IO_CQOutFuncPLAU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_inactive"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc11"/>
+          </SingleValue>
+          <SingleValue value="2">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc12"/>
+          </SingleValue>
+          <SingleValue value="3">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc21"/>
+          </SingleValue>
+          <SingleValue value="4">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc22"/>
+          </SingleValue>
+          <SingleValue value="5">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc31"/>
+          </SingleValue>
+          <SingleValue value="6">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc32"/>
+          </SingleValue>
+          <SingleValue value="7">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc41"/>
+          </SingleValue>
+          <SingleValue value="8">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc42"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_IO_IQOutFuncPLAU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_inactive"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc11"/>
+          </SingleValue>
+          <SingleValue value="2">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc12"/>
+          </SingleValue>
+          <SingleValue value="3">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc21"/>
+          </SingleValue>
+          <SingleValue value="4">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc22"/>
+          </SingleValue>
+          <SingleValue value="5">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc31"/>
+          </SingleValue>
+          <SingleValue value="6">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc32"/>
+          </SingleValue>
+          <SingleValue value="7">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc41"/>
+          </SingleValue>
+          <SingleValue value="8">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_ssc42"/>
+          </SingleValue>
+          <SingleValue value="11">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_aovrms"/>
+          </SingleValue>
+          <SingleValue value="12">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_aoarms"/>
+          </SingleValue>
+          <SingleValue value="13">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_aoapeak"/>
+          </SingleValue>
+          <SingleValue value="14">
+            <Name textId="TN_SV_XPFV_IO_OutFunc_aotemp"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_IO_AOParamTempST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC40_SetpointI32"/>
+            <Name textId="TN_V_XPFV_IO_AOParamTemp_SP1"/>
+            <Description textId="TD_V_XPFV_IO_AOParamTemp_SP1"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC40_SetpointI32"/>
+            <Name textId="TN_V_XPFV_IO_AOParamTemp_SP2"/>
+            <Description textId="TD_V_XPFV_IO_AOParamTemp_SP2"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFS_Event_ConfigST" xsi:type="RecordT" bitLength="16" subindexAccessSupported="false">
+          <RecordItem subindex="1" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_DisEnableB"/>
+            <Name textId="TN_V_XPFS_Event_Config_MaintenanceRequest"/>
+            <Description textId="TD_V_XPFS_Event_Config_MaintenanceRequest"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="1">
+            <DatatypeRef datatypeId="D_XPFS_DisEnableB"/>
+            <Name textId="TN_V_XPFS_Reserved"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFS_DisEnableB" xsi:type="BooleanT">
+          <SingleValue value="true">
+            <Name textId="TN_SV_XPFS_DisEnable_enable"/>
+          </SingleValue>
+          <SingleValue value="false">
+            <Name textId="TN_SV_XPFS_DisEnable_disable"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_DeviceCharST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="16">
+              <SingleValue value="0">
+                <Name textId="TN_SV_XPFV_Device_Char_MeasRng_low"/>
+              </SingleValue>
+              <SingleValue value="1">
+                <Name textId="TN_SV_XPFV_Device_Char_MeasRng_high"/>
+              </SingleValue>
+            </SimpleDatatype>
+            <Name textId="TN_V_XPFV_Device_Char_MeasRng"/>
+            <Description textId="TD_V_XPFV_Device_Char_MeasRng"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="16">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="16">
+              <SingleValue value="0">
+                <Name textId="TN_SV_XPFV_Device_Char_MeasBandwidth_small"/>
+              </SingleValue>
+              <SingleValue value="1">
+                <Name textId="TN_SV_XPFV_Device_Char_MeasBandwidth_wide"/>
+              </SingleValue>
+            </SimpleDatatype>
+            <Name textId="TN_V_XPFV_Device_Char_MeasBandwidth"/>
+            <Description textId="TD_V_XPFV_Device_Char_MeasBandwidth"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <SimpleDatatype xsi:type="UIntegerT" bitLength="16">
+						</SimpleDatatype>
+            <Name textId="TN_V_XPFS_Device_Char_SupplyCurrMax"/>
+            <Description textId="TD_V_XPFS_Device_Char_SupplyCurrMax"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFS_MDC_Descriptor" xsi:type="RecordT" bitLength="88" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="56">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="32">
+						</SimpleDatatype>
+            <Name textId="TN_V_XPFS_MDC_Descriptor_LowerValue"/>
+            <Description textId="TD_V_XPFS_MDC_Descriptor_LowerValue"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="24">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="32">
+						</SimpleDatatype>
+            <Name textId="TN_V_XPFS_MDC_Descriptor_UpperValue"/>
+            <Description textId="TD_V_XPFS_MDC_Descriptor_UpperValue"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="8">
+            <SimpleDatatype xsi:type="UIntegerT" bitLength="16">
+						</SimpleDatatype>
+            <Name textId="TN_V_XPFS_MDC_Descriptor_UnitCode"/>
+            <Description textId="TD_V_XPFS_MDC_Descriptor_UnitCode"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="0">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="8">
+						</SimpleDatatype>
+            <Name textId="TN_V_XPFS_MDC_Descriptor_Scale"/>
+            <Description textId="TD_V_XPFS_MDC_Descriptor_Scale"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_ThreshVrmsI32" xsi:type="IntegerT" bitLength="32">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="12800"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_ThreshArmsI32" xsi:type="IntegerT" bitLength="32">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="1000"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_ThreshApeakI32" xsi:type="IntegerT" bitLength="32">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="1400"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_ThreshTempI32" xsi:type="IntegerT" bitLength="32">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="100"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_CountLimitU16" xsi:type="UIntegerT" bitLength="16">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="65535"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_Config_OperLimitU16" xsi:type="UIntegerT" bitLength="16">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFV_Maintenance_Config_disable"/>
+          </SingleValue>
+          <ValueRange lowerValue="1" upperValue="10000"/>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_ConfigVrmsST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_ThreshVrmsI32"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_ThreshVrms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_ThreshVrms"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_CountLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_CountLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_CountLimit"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_OperLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_OperLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_OperLimit"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_ConfigArmsST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_ThreshArmsI32"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_ThreshArms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_ThreshArms"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_CountLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_CountLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_CountLimit"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_OperLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_OperLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_OperLimit"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_ConfigApeakST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_ThreshApeakI32"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_ThreshApeak"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_ThreshApeak"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_CountLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_CountLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_CountLimit"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_OperLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_OperLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_OperLimit"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_ConfigTempST" xsi:type="RecordT" bitLength="64" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_ThreshTempI32"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_ThreshTemp"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_ThreshTemp"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_CountLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_CountLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_CountLimit"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_OperLimitU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Config_OperLimit"/>
+            <Description textId="TD_V_XPFV_Maintenance_Config_OperLimit"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_MonST" xsi:type="RecordT" bitLength="48" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFS_OPM_OperatingHourU32"/>
+            <Name textId="TN_V_XPFV_Maintenance_Mon_OverrunTime"/>
+            <Description textId="TD_V_XPFV_Maintenance_Mon_OverrunTime"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_OPM_CounterU16"/>
+            <Name textId="TN_V_XPFV_Maintenance_Mon_OverrunCount"/>
+            <Description textId="TD_V_XPFV_Maintenance_Mon_OverrunCount"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_Maintenance_StatusPLAST" xsi:type="RecordT" bitLength="16" subindexAccessSupported="false">
+          <RecordItem subindex="1" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_OperVrms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_OperVrms"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="1">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_CountVrms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_CountVrms"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="2">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_OperArms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_OperArms"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="3">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_CountArms"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_CountArms"/>
+          </RecordItem>
+          <RecordItem subindex="5" bitOffset="4">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_OperApeak"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_OperApeak"/>
+          </RecordItem>
+          <RecordItem subindex="6" bitOffset="5">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_CountApeak"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_CountApeak"/>
+          </RecordItem>
+          <RecordItem subindex="7" bitOffset="6">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_OperTemp"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_OperTemp"/>
+          </RecordItem>
+          <RecordItem subindex="8" bitOffset="7">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_CountTemp"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_CountTemp"/>
+          </RecordItem>
+          <RecordItem subindex="16" bitOffset="15">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_Maintenance_Status_OperTime"/>
+            <Description textId="TD_V_XPFV_Maintenance_Status_OperTime"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFS_OPM_OperatingHourU32" xsi:type="UIntegerT" bitLength="32"/>
+        <Datatype id="D_XPFS_OPM_UptimeU32" xsi:type="UIntegerT" bitLength="32"/>
+        <Datatype id="D_XPFS_OPM_CounterU16" xsi:type="UIntegerT" bitLength="16"/>
+        <Datatype id="D_XPFS_OPM_CounterU32" xsi:type="UIntegerT" bitLength="32"/>
+        <Datatype id="D_XPFS_OPM_TemperatureI8" xsi:type="IntegerT" bitLength="8"/>
+        <Datatype id="D_XPFS_OPM_TempIndicatorU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_OPM_TempInd_safe"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFS_OPM_TempInd_criticalhigh"/>
+          </SingleValue>
+          <SingleValue value="2">
+            <Name textId="TN_SV_XPFS_OPM_TempInd_overtemp"/>
+          </SingleValue>
+          <SingleValue value="3">
+            <Name textId="TN_SV_XPFS_OPM_TempInd_criticallow"/>
+          </SingleValue>
+          <SingleValue value="4">
+            <Name textId="TN_SV_XPFS_OPM_TempInd_undertemp"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFS_OPM_TempMonitorST" xsi:type="RecordT" bitLength="72" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFS_OPM_OperatingHourU32"/>
+            <Name textId="TN_V_XPFS_OPM_OVTOperHour"/>
+            <Description textId="TD_V_XPFS_OPM_OVTOperHour"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="24">
+            <DatatypeRef datatypeId="D_XPFS_OPM_CounterU16"/>
+            <Name textId="TN_V_XPFS_OPM_OVTExceedCount"/>
+            <Description textId="TD_V_XPFS_OPM_OVTExceedCount"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFS_OPM_TemperatureI8"/>
+            <Name textId="TN_V_XPFS_OPM_TempMax"/>
+            <Description textId="TD_V_XPFS_OPM_TempMax"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="8">
+            <DatatypeRef datatypeId="D_XPFS_OPM_TemperatureI8"/>
+            <Name textId="TN_V_XPFS_OPM_TempMin"/>
+            <Description textId="TD_V_XPFS_OPM_TempMin"/>
+          </RecordItem>
+          <RecordItem subindex="5" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_OPM_TemperatureI8"/>
+            <Name textId="TN_V_XPFS_OPM_TempCur"/>
+            <Description textId="TD_V_XPFS_OPM_TempCur"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFS_OPM_PowerMonitorST" xsi:type="RecordT" bitLength="128" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="96">
+            <DatatypeRef datatypeId="D_XPFS_OPM_CounterU32"/>
+            <Name textId="TN_V_XPFS_OPM_PowerCycles"/>
+            <Description textId="TD_V_XPFS_OPM_PowerCycles"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="64">
+            <DatatypeRef datatypeId="D_XPFS_OPM_UptimeU32"/>
+            <Name textId="TN_V_XPFS_OPM_UptimeMax"/>
+            <Description textId="TD_V_XPFS_OPM_UptimeMax"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFS_OPM_UptimeU32"/>
+            <Name textId="TN_V_XPFS_OPM_UptimeAvg"/>
+            <Description textId="TD_V_XPFS_OPM_UptimeAvg"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_OPM_UptimeU32"/>
+            <Name textId="TN_V_XPFS_OPM_UptimeCur"/>
+            <Description textId="TD_V_XPFS_OPM_UptimeCur"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_ObserveDataPLAST" xsi:type="RecordT" bitLength="136" subindexAccessSupported="true">
+          <RecordItem subindex="1" bitOffset="120">
+            <DatatypeRef datatypeId="D_XPFV_MDC1_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC1_MV"/>
+            <Description textId="TD_V_XPFV_MDC1_MV"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="112">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC11"/>
+            <Description textId="TD_V_XPFV_SSC11"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="104">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC12"/>
+            <Description textId="TD_V_XPFV_SSC12"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="88">
+            <DatatypeRef datatypeId="D_XPFV_MDC2_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC2_MV"/>
+            <Description textId="TD_V_XPFV_MDC2_MV"/>
+          </RecordItem>
+          <RecordItem subindex="5" bitOffset="80">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC21"/>
+            <Description textId="TD_V_XPFV_SSC21"/>
+          </RecordItem>
+          <RecordItem subindex="6" bitOffset="72">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC22"/>
+            <Description textId="TD_V_XPFV_SSC22"/>
+          </RecordItem>
+          <RecordItem subindex="7" bitOffset="56">
+            <DatatypeRef datatypeId="D_XPFV_MDC3_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC3_MV"/>
+            <Description textId="TD_V_XPFV_MDC3_MV"/>
+          </RecordItem>
+          <RecordItem subindex="8" bitOffset="48">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC31"/>
+            <Description textId="TD_V_XPFV_SSC31"/>
+          </RecordItem>
+          <RecordItem subindex="9" bitOffset="40">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC32"/>
+            <Description textId="TD_V_XPFV_SSC32"/>
+          </RecordItem>
+          <RecordItem subindex="10" bitOffset="24">
+            <DatatypeRef datatypeId="D_XPFV_MDC4_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC4_MV"/>
+            <Description textId="TD_V_XPFV_MDC4_MV"/>
+          </RecordItem>
+          <RecordItem subindex="11" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC41"/>
+            <Description textId="TD_V_XPFV_SSC41"/>
+          </RecordItem>
+          <RecordItem subindex="12" bitOffset="8">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighU8"/>
+            <Name textId="TN_V_XPFV_SSC42"/>
+            <Description textId="TD_V_XPFV_SSC42"/>
+          </RecordItem>
+          <RecordItem subindex="13" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveU8"/>
+            <Name textId="TN_V_XPFV_DSC1_MaintenanceWarning"/>
+            <Description textId="TD_V_XPFV_DSC1_MaintenanceWarning"/>
+          </RecordItem>
+        </Datatype>
+        <Datatype id="D_XPFV_MDC1_MVI16" xsi:type="IntegerT" bitLength="16">
+          <ValueRange lowerValue="0" upperValue="12800"/>
+          <SingleValue value="32764">
+            <Name textId="TN_SV_XPFS_MV_nomeasdata"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_MDC2_MVI16" xsi:type="IntegerT" bitLength="16">
+          <ValueRange lowerValue="0" upperValue="1000"/>
+          <SingleValue value="32764">
+            <Name textId="TN_SV_XPFS_MV_nomeasdata"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_MDC3_MVI16" xsi:type="IntegerT" bitLength="16">
+          <ValueRange lowerValue="0" upperValue="1400"/>
+          <SingleValue value="32764">
+            <Name textId="TN_SV_XPFS_MV_nomeasdata"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_MDC4_MVI16" xsi:type="IntegerT" bitLength="16">
+          <ValueRange lowerValue="-50" upperValue="100"/>
+          <SingleValue value="32764">
+            <Name textId="TN_SV_XPFS_MV_nomeasdata"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_State_LowHighB" xsi:type="BooleanT">
+          <SingleValue value="false">
+            <Name textId="TN_SV_XPFS_SSC_State_low"/>
+          </SingleValue>
+          <SingleValue value="true">
+            <Name textId="TN_SV_XPFS_SSC_State_high"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_SSC_State_LowHighU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_SSC_State_low"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFS_SSC_State_high"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFS_State_InactiveActiveB" xsi:type="BooleanT">
+          <SingleValue value="false">
+            <Name textId="TN_SV_XPFS_State_inactive"/>
+          </SingleValue>
+          <SingleValue value="true">
+            <Name textId="TN_SV_XPFS_State_active"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFS_State_InactiveActiveU8" xsi:type="UIntegerT" bitLength="8">
+          <SingleValue value="0">
+            <Name textId="TN_SV_XPFS_State_inactive"/>
+          </SingleValue>
+          <SingleValue value="1">
+            <Name textId="TN_SV_XPFS_State_active"/>
+          </SingleValue>
+        </Datatype>
+        <Datatype id="D_XPFV_MSDC32_4" xsi:type="RecordT" bitLength="128" subindexAccessSupported="false">
+          <RecordItem subindex="1" bitOffset="112">
+            <DatatypeRef datatypeId="D_XPFV_MDC1_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC1_MV"/>
+            <Description textId="TD_V_XPFV_MDC1_MV"/>
+          </RecordItem>
+          <RecordItem subindex="2" bitOffset="104">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="8"/>
+            <Name textId="TN_V_XPFV_MDC1_Scale"/>
+            <Description textId="TD_V_XPFV_MDC1_Scale"/>
+          </RecordItem>
+          <RecordItem subindex="3" bitOffset="96">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC11"/>
+            <Description textId="TD_V_XPFV_SSC11"/>
+          </RecordItem>
+          <RecordItem subindex="4" bitOffset="97">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC12"/>
+            <Description textId="TD_V_XPFV_SSC12"/>
+          </RecordItem>
+          <RecordItem subindex="11" bitOffset="80">
+            <DatatypeRef datatypeId="D_XPFV_MDC2_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC2_MV"/>
+            <Description textId="TD_V_XPFV_MDC2_MV"/>
+          </RecordItem>
+          <RecordItem subindex="12" bitOffset="72">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="8"/>
+            <Name textId="TN_V_XPFV_MDC2_Scale"/>
+            <Description textId="TD_V_XPFV_MDC2_Scale"/>
+          </RecordItem>
+          <RecordItem subindex="13" bitOffset="64">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC21"/>
+            <Description textId="TD_V_XPFV_SSC21"/>
+          </RecordItem>
+          <RecordItem subindex="14" bitOffset="65">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC22"/>
+            <Description textId="TD_V_XPFV_SSC22"/>
+          </RecordItem>
+          <RecordItem subindex="21" bitOffset="48">
+            <DatatypeRef datatypeId="D_XPFV_MDC3_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC3_MV"/>
+            <Description textId="TD_V_XPFV_MDC3_MV"/>
+          </RecordItem>
+          <RecordItem subindex="22" bitOffset="40">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="8"/>
+            <Name textId="TN_V_XPFV_MDC3_Scale"/>
+            <Description textId="TD_V_XPFV_MDC3_Scale"/>
+          </RecordItem>
+          <RecordItem subindex="23" bitOffset="32">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC31"/>
+            <Description textId="TD_V_XPFV_SSC31"/>
+          </RecordItem>
+          <RecordItem subindex="24" bitOffset="33">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC32"/>
+            <Description textId="TD_V_XPFV_SSC32"/>
+          </RecordItem>
+          <RecordItem subindex="31" bitOffset="16">
+            <DatatypeRef datatypeId="D_XPFV_MDC4_MVI16"/>
+            <Name textId="TN_V_XPFV_MDC4_MV"/>
+            <Description textId="TD_V_XPFV_MDC4_MV"/>
+          </RecordItem>
+          <RecordItem subindex="32" bitOffset="8">
+            <SimpleDatatype xsi:type="IntegerT" bitLength="8"/>
+            <Name textId="TN_V_XPFV_MDC4_Scale"/>
+            <Description textId="TD_V_XPFV_MDC4_Scale"/>
+          </RecordItem>
+          <RecordItem subindex="33" bitOffset="0">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC41"/>
+            <Description textId="TD_V_XPFV_SSC41"/>
+          </RecordItem>
+          <RecordItem subindex="34" bitOffset="1">
+            <DatatypeRef datatypeId="D_XPFV_SSC_State_LowHighB"/>
+            <Name textId="TN_V_XPFV_SSC42"/>
+            <Description textId="TD_V_XPFV_SSC42"/>
+          </RecordItem>
+          <RecordItem subindex="37" bitOffset="4">
+            <DatatypeRef datatypeId="D_XPFS_State_InactiveActiveB"/>
+            <Name textId="TN_V_XPFV_DSC1_MaintenanceWarning"/>
+            <Description textId="TD_V_XPFV_DSC1_MaintenanceWarning"/>
+          </RecordItem>
+        </Datatype>
+      </DatatypeCollection>
+      <VariableCollection>
+        <StdVariableRef id="V_DirectParameters_1"/>
+        <StdVariableRef id="V_SystemCommand">
+          <StdSingleValueRef value="129"/>
+          <StdSingleValueRef value="131"/>
+          <SingleValue value="176">
+            <Name textId="TN_XPFS_SystemCommand_MaintenanceReset"/>
+          </SingleValue>
+        </StdVariableRef>
+        <StdVariableRef id="V_VendorName" defaultValue="Pepperl+Fuchs"/>
+        <StdVariableRef id="V_VendorText" defaultValue="www.pepperl-fuchs.com/io-link"/>
+        <StdVariableRef id="V_ProductName" defaultValue="VIM32PL-E1AC8-0RE-IO-1V1401"/>
+        <StdVariableRef id="V_ProductID" defaultValue="70140695-100001"/>
+        <StdVariableRef id="V_ProductText" defaultValue="Vibration sensor"/>
+        <StdVariableRef id="V_SerialNumber"/>
+        <StdVariableRef id="V_HardwareRevision"/>
+        <StdVariableRef id="V_FirmwareRevision"/>
+        <StdVariableRef id="V_ApplicationSpecificTag" excludedFromDataStorage="false"/>
+        <StdVariableRef id="V_DeviceStatus"/>
+        <StdVariableRef id="V_DetailedDeviceStatus" fixedLengthRestriction="4"/>
+        <StdVariableRef id="V_ProcessDataInput"/>
+        <Variable id="V_CP_FunctionTag" index="25" accessRights="rw" excludedFromDataStorage="false">
+          <Datatype xsi:type="StringT" fixedLength="32" encoding="UTF-8"/>
+          <Name textId="TN_V_CP_FunctionTag"/>
+          <Description textId="TD_V_CP_FunctionTag"/>
+        </Variable>
+        <Variable id="V_CP_LocationTag" index="26" accessRights="rw" excludedFromDataStorage="false">
+          <Datatype xsi:type="StringT" fixedLength="32" encoding="UTF-8"/>
+          <Name textId="TN_V_CP_LocationTag"/>
+          <Description textId="TD_V_CP_LocationTag"/>
+        </Variable>
+        <Variable id="V_CP_ProductURI" index="27" accessRights="ro">
+          <Datatype xsi:type="StringT" fixedLength="100" encoding="US-ASCII"/>
+          <Name textId="TN_V_CP_ProductURI"/>
+          <Description textId="TD_V_CP_ProductURI"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC11_Param" index="64" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC10_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC11_ParamVrms"/>
+          <Description textId="TD_V_XPFV_SSC11_ParamVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC11_Config" index="65" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC10_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC11_ConfigVrms"/>
+          <Description textId="TD_V_XPFV_SSC11_ConfigVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC12_Param" index="66" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC10_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC12_ParamVrms"/>
+          <Description textId="TD_V_XPFV_SSC12_ParamVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC12_Config" index="67" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC10_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC12_ConfigVrms"/>
+          <Description textId="TD_V_XPFV_SSC12_ConfigVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC21_Param" index="68" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC20_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC21_ParamArms"/>
+          <Description textId="TD_V_XPFV_SSC21_ParamArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC21_Config" index="69" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC20_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC21_ConfigArms"/>
+          <Description textId="TD_V_XPFV_SSC21_ConfigArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC22_Param" index="70" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC20_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC22_ParamArms"/>
+          <Description textId="TD_V_XPFV_SSC22_ParamArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC22_Config" index="71" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC20_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC22_ConfigArms"/>
+          <Description textId="TD_V_XPFV_SSC22_ConfigArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC31_Param" index="72" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC30_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC31_ParamApeak"/>
+          <Description textId="TD_V_XPFV_SSC31_ParamApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC31_Config" index="73" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC30_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC31_ConfigApeak"/>
+          <Description textId="TD_V_XPFV_SSC31_ConfigApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC32_Param" index="74" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC30_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC32_ParamApeak"/>
+          <Description textId="TD_V_XPFV_SSC32_ParamApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC32_Config" index="75" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC30_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC32_ConfigApeak"/>
+          <Description textId="TD_V_XPFV_SSC32_ConfigApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC41_Param" index="76" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC40_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="50"/>
+          <RecordItemInfo subindex="2" defaultValue="80"/>
+          <Name textId="TN_V_XPFV_SSC41_ParamTemp"/>
+          <Description textId="TD_V_XPFV_SSC41_ParamTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC41_Config" index="77" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC40_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC41_ConfigTemp"/>
+          <Description textId="TD_V_XPFV_SSC41_ConfigTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC42_Param" index="78" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC40_ParamST"/>
+          <RecordItemInfo subindex="1" defaultValue="50"/>
+          <RecordItemInfo subindex="2" defaultValue="80"/>
+          <Name textId="TN_V_XPFV_SSC42_ParamTemp"/>
+          <Description textId="TD_V_XPFV_SSC42_ParamTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC42_Config" index="79" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_SSC40_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_SSC42_ConfigTemp"/>
+          <Description textId="TD_V_XPFV_SSC42_ConfigTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC11_OffDelay" index="84" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC11_OffDelayVrms"/>
+          <Description textId="TD_V_XPFV_SSC11_OffDelayVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC12_OffDelay" index="85" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC12_OffDelayVrms"/>
+          <Description textId="TD_V_XPFV_SSC12_OffDelayVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC21_OffDelay" index="86" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC21_OffDelayArms"/>
+          <Description textId="TD_V_XPFV_SSC21_OffDelayArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC22_OffDelay" index="87" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC22_OffDelayArms"/>
+          <Description textId="TD_V_XPFV_SSC22_OffDelayArms"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC31_OffDelay" index="88" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC31_OffDelayApeak"/>
+          <Description textId="TD_V_XPFV_SSC31_OffDelayApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC32_OffDelay" index="89" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC32_OffDelayApeak"/>
+          <Description textId="TD_V_XPFV_SSC32_OffDelayApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC41_OffDelay" index="90" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC41_OffDelayTemp"/>
+          <Description textId="TD_V_XPFV_SSC41_OffDelayTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_SSC42_OffDelay" index="91" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_SSC_OffDelayU16"/>
+          <Name textId="TN_V_XPFV_SSC42_OffDelayTemp"/>
+          <Description textId="TD_V_XPFV_SSC42_OffDelayTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_Eval_Filter" index="96" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_Eval_FilterVIMPLAU8"/>
+          <Name textId="TN_V_XPFV_Eval_Filter"/>
+          <Description textId="TD_V_XPFV_Eval_Filter"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_CQOutFunc" index="112" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_IO_CQOutFuncPLAU8"/>
+          <Name textId="TN_V_XPFV_IO_CQOutFunc"/>
+          <Description textId="TD_V_XPFV_IO_CQOutFunc"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_IQOutFunc" index="113" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_IO_IQOutFuncPLAU8"/>
+          <Name textId="TN_V_XPFV_IO_IQOutFunc"/>
+          <Description textId="TD_V_XPFV_IO_IQOutFunc"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_AOParamVrms" index="114" accessRights="rw" excludedFromDataStorage="false" defaultValue="12800">
+          <DatatypeRef datatypeId="D_XPFV_SSC10_SetpointI32"/>
+          <Name textId="TN_V_XPFV_IO_AOParamVrms"/>
+          <Description textId="TD_V_XPFV_IO_AOParam"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_AOParamArms" index="115" accessRights="rw" excludedFromDataStorage="false" defaultValue="1000">
+          <DatatypeRef datatypeId="D_XPFV_SSC20_SetpointI32"/>
+          <Name textId="TN_V_XPFV_IO_AOParamArms"/>
+          <Description textId="TD_V_XPFV_IO_AOParam"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_AOParamApeak" index="116" accessRights="rw" excludedFromDataStorage="false" defaultValue="1400">
+          <DatatypeRef datatypeId="D_XPFV_SSC30_SetpointI32"/>
+          <Name textId="TN_V_XPFV_IO_AOParamApeak"/>
+          <Description textId="TD_V_XPFV_IO_AOParam"/>
+        </Variable>
+        <Variable id="V_XPFV_IO_AOParamTemp" index="117" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_IO_AOParamTempST"/>
+          <RecordItemInfo subindex="1" defaultValue="-40"/>
+          <RecordItemInfo subindex="2" defaultValue="80"/>
+          <Name textId="TN_V_XPFV_IO_AOParamTemp"/>
+          <Description textId="TD_V_XPFV_IO_AOParamTemp"/>
+        </Variable>
+        <Variable id="V_XPFS_Event_Config" index="120" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFS_Event_ConfigST"/>
+          <RecordItemInfo subindex="1" defaultValue="false"/>
+          <RecordItemInfo subindex="2" defaultValue="false"/>
+          <Name textId="TN_V_XPFS_Event_Config"/>
+          <Description textId="TD_V_XPFS_Event_Config"/>
+        </Variable>
+        <Variable id="V_XPFS_Device_Char" index="176" accessRights="ro">
+          <DatatypeRef datatypeId="D_XPFV_DeviceCharST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="700"/>
+          <Name textId="TN_V_XPFS_Device_Char"/>
+          <Description textId="TD_V_XPFS_Device_Char"/>
+        </Variable>
+        <Variable id="V_XPFV_MDC1_Descriptor" index="177" accessRights="ro">
+          <DatatypeRef datatypeId="D_XPFS_MDC_Descriptor"/>
+          <Name textId="TN_V_XPFV_MDC1_Descriptor"/>
+          <Description textId="TD_V_XPFV_MDC1_Descriptor"/>
+        </Variable>
+        <Variable id="V_XPFV_MDC2_Descriptor" index="178" accessRights="ro">
+          <DatatypeRef datatypeId="D_XPFS_MDC_Descriptor"/>
+          <Name textId="TN_V_XPFV_MDC2_Descriptor"/>
+          <Description textId="TD_V_XPFV_MDC2_Descriptor"/>
+        </Variable>
+        <Variable id="V_XPFV_MDC3_Descriptor" index="179" accessRights="ro">
+          <DatatypeRef datatypeId="D_XPFS_MDC_Descriptor"/>
+          <Name textId="TN_V_XPFV_MDC3_Descriptor"/>
+          <Description textId="TD_V_XPFV_MDC3_Descriptor"/>
+        </Variable>
+        <Variable id="V_XPFV_MDC4_Descriptor" index="180" accessRights="ro">
+          <DatatypeRef datatypeId="D_XPFS_MDC_Descriptor"/>
+          <Name textId="TN_V_XPFV_MDC4_Descriptor"/>
+          <Description textId="TD_V_XPFV_MDC4_Descriptor"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_ConfigVrms" index="208" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_ConfigVrmsST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_Maintenance_ConfigVrms"/>
+          <Description textId="TD_V_XPFV_Maintenance_ConfigVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_ConfigArms" index="209" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_ConfigArmsST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_Maintenance_ConfigArms"/>
+          <Description textId="TD_V_XPFV_Maintenance_ConfigArms"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_ConfigApeak" index="210" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_ConfigApeakST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_Maintenance_ConfigApeak"/>
+          <Description textId="TD_V_XPFV_Maintenance_ConfigApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_ConfigTemp" index="211" accessRights="rw" excludedFromDataStorage="false">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_ConfigTempST"/>
+          <RecordItemInfo subindex="1" defaultValue="0"/>
+          <RecordItemInfo subindex="2" defaultValue="0"/>
+          <RecordItemInfo subindex="3" defaultValue="0"/>
+          <Name textId="TN_V_XPFV_Maintenance_ConfigTemp"/>
+          <Description textId="TD_V_XPFV_Maintenance_ConfigTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_ConfigOper" index="213" accessRights="rw" excludedFromDataStorage="false" defaultValue="0">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_Config_OperLimitU16"/>
+          <Name textId="TN_V_XPFV_Maintenance_ConfigOper"/>
+          <Description textId="TD_V_XPFV_Maintenance_ConfigOper"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_MonVrms" index="216" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_MonST"/>
+          <Name textId="TN_V_XPFV_Maintenance_MonVrms"/>
+          <Description textId="TD_V_XPFV_Maintenance_MonVrms"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_MonArms" index="217" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_MonST"/>
+          <Name textId="TN_V_XPFV_Maintenance_MonArms"/>
+          <Description textId="TD_V_XPFV_Maintenance_MonArms"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_MonApeak" index="218" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_MonST"/>
+          <Name textId="TN_V_XPFV_Maintenance_MonApeak"/>
+          <Description textId="TD_V_XPFV_Maintenance_MonApeak"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_MonTemp" index="219" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_MonST"/>
+          <Name textId="TN_V_XPFV_Maintenance_MonTemp"/>
+          <Description textId="TD_V_XPFV_Maintenance_MonTemp"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_MonOperTime" index="221" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFS_OPM_OperatingHourU32"/>
+          <Name textId="TN_V_XPFV_Maintenance_MonOperTime"/>
+          <Description textId="TD_V_XPFV_Maintenance_MonOperTime"/>
+        </Variable>
+        <Variable id="V_XPFV_Maintenance_Status" index="223" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_Maintenance_StatusPLAST"/>
+          <Name textId="TN_V_XPFV_Maintenance_Status"/>
+          <Description textId="TD_V_XPFV_Maintenance_Status"/>
+        </Variable>
+        <Variable id="V_XPFS_OPM_OperHour" index="224" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFS_OPM_OperatingHourU32"/>
+          <Name textId="TN_V_XPFS_OPM_OperHour"/>
+          <Description textId="TD_V_XPFS_OPM_OperHour"/>
+        </Variable>
+        <Variable id="V_XPFS_OPM_TempInd" index="225" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFS_OPM_TempIndicatorU8"/>
+          <Name textId="TN_V_XPFS_OPM_TempInd"/>
+          <Description textId="TD_V_XPFS_OPM_TempInd"/>
+        </Variable>
+        <Variable id="V_XPFS_OPM_TempMon" index="226" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFS_OPM_TempMonitorST"/>
+          <Name textId="TN_V_XPFS_OPM_TempMon"/>
+          <Description textId="TD_V_XPFS_OPM_TempMon"/>
+        </Variable>
+        <Variable id="V_XPFS_OPM_PowerMon" index="227" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFS_OPM_PowerMonitorST"/>
+          <Name textId="TN_V_XPFS_OPM_PowerMon"/>
+          <Description textId="TD_V_XPFS_OPM_PowerMon"/>
+        </Variable>
+        <Variable id="V_XPFS_ObserveData" index="236" accessRights="ro" dynamic="true">
+          <DatatypeRef datatypeId="D_XPFV_ObserveDataPLAST"/>
+          <Name textId="TN_V_XPFS_ObserveData"/>
+          <Description textId="TD_V_XPFS_ObserveData"/>
+        </Variable>
+      </VariableCollection>
+      <ProcessDataCollection>
+        <ProcessData id="P_ProcessData">
+          <ProcessDataIn id="PI_PDI" bitLength="128">
+            <DatatypeRef datatypeId="D_XPFV_MSDC32_4"/>
+            <Name textId="TN_PI_XPFS_PDin"/>
+          </ProcessDataIn>
+        </ProcessData>
+      </ProcessDataCollection>
+      <ErrorTypeCollection>
+        <!-- 0x8011 IDX_NOTAVAIL -->
+        <StdErrorTypeRef code="128" additionalCode="17"/>
+        <!-- 0x8012 SUBIDX_NOTAVAIL -->
+        <StdErrorTypeRef code="128" additionalCode="18"/>
+        <!-- 0x8020 SERV_NOTAVAIL -->
+        <StdErrorTypeRef code="128" additionalCode="32"/>
+        <!-- 0x8021 SERV_NOTAVAIL_LOCCTRL -->
+        <StdErrorTypeRef code="128" additionalCode="33"/>
+        <!-- 0x8022 SERV_NOTAVAIL_DEVCTRL -->
+        <StdErrorTypeRef code="128" additionalCode="34"/>
+        <!-- 0x8023 IDX_NOT_ACCESSIBLE -->
+        <StdErrorTypeRef code="128" additionalCode="35"/>
+        <!-- 0x8030 PAR_VALOUTOFRNG -->
+        <StdErrorTypeRef code="128" additionalCode="48"/>
+        <!-- 0x8031 PAR_VALGTLIM -->
+        <StdErrorTypeRef code="128" additionalCode="49"/>
+        <!-- 0x8032 PAR_VALLTLIM -->
+        <StdErrorTypeRef code="128" additionalCode="50"/>
+        <!-- 0x8033 VAL_LENOVRRUN -->
+        <StdErrorTypeRef code="128" additionalCode="51"/>
+        <!-- 0x8034 VAL_LENUNDRUN -->
+        <StdErrorTypeRef code="128" additionalCode="52"/>
+        <!-- 0x8035 FUNC_NOTAVAIL -->
+        <StdErrorTypeRef code="128" additionalCode="53"/>
+        <!-- 0x8036 FUNC_UNAVAILTEMP -->
+        <StdErrorTypeRef code="128" additionalCode="54"/>
+        <!-- 0x8040 PAR_SETINVALID -->
+        <StdErrorTypeRef code="128" additionalCode="64"/>
+        <!--0x8041  PAR_SETINCONSIST -->
+        <StdErrorTypeRef code="128" additionalCode="65"/>
+      </ErrorTypeCollection>
+      <EventCollection>
+        <!-- Hex= 0x5000 -->
+        <StdEventRef code="20480"/>
+        <Event code="36097" type="Warning">
+          <!-- Hex= 0x8D01 -->
+          <Name textId="TN_EV_XPFS_Warn_MaintenanceRequest"/>
+          <Description textId="TD_EV_XPFS_Warn_MaintenanceRequest"/>
+        </Event>
+        <Event code="36163" type="Warning">
+          <!-- Hex= 0x8D43 -->
+          <Name textId="TN_EV_XPFS_Warn_TempExceeded"/>
+          <Description textId="TD_EV_XPFS_Warn_TempExceeded"/>
+        </Event>
+      </EventCollection>
+      <UserInterface>
+        <ProcessDataRefCollection>
+          <ProcessDataRef processDataId="PI_PDI">
+            <ProcessDataRecordItemInfo subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <ProcessDataRecordItemInfo subindex="3"/>
+            <ProcessDataRecordItemInfo subindex="4"/>
+            <ProcessDataRecordItemInfo subindex="11" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <ProcessDataRecordItemInfo subindex="13"/>
+            <ProcessDataRecordItemInfo subindex="14"/>
+            <ProcessDataRecordItemInfo subindex="21" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <ProcessDataRecordItemInfo subindex="23"/>
+            <ProcessDataRecordItemInfo subindex="24"/>
+            <ProcessDataRecordItemInfo subindex="31" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <ProcessDataRecordItemInfo subindex="33"/>
+            <ProcessDataRecordItemInfo subindex="34"/>
+            <ProcessDataRecordItemInfo subindex="37"/>
+          </ProcessDataRef>
+        </ProcessDataRefCollection>
+        <MenuCollection>
+          <Menu id="M_OR_Ident">
+            <!-- top level menu -->
+            <VariableRef variableId="V_VendorName"/>
+            <VariableRef variableId="V_VendorText"/>
+            <VariableRef variableId="V_ProductName"/>
+            <VariableRef variableId="V_ProductText"/>
+            <VariableRef variableId="V_ProductID"/>
+            <VariableRef variableId="V_SerialNumber"/>
+            <VariableRef variableId="V_CP_ProductURI"/>
+            <VariableRef variableId="V_HardwareRevision"/>
+            <VariableRef variableId="V_FirmwareRevision"/>
+            <VariableRef variableId="V_ApplicationSpecificTag" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_CP_FunctionTag" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_CP_LocationTag" accessRightRestriction="ro"/>
+          </Menu>
+          <Menu id="M_MSR_Ident">
+            <!-- top level menu -->
+            <VariableRef variableId="V_VendorName"/>
+            <VariableRef variableId="V_VendorText"/>
+            <VariableRef variableId="V_ProductName"/>
+            <VariableRef variableId="V_ProductText"/>
+            <VariableRef variableId="V_ProductID"/>
+            <VariableRef variableId="V_SerialNumber"/>
+            <VariableRef variableId="V_CP_ProductURI"/>
+            <VariableRef variableId="V_HardwareRevision"/>
+            <VariableRef variableId="V_FirmwareRevision"/>
+            <VariableRef variableId="V_ApplicationSpecificTag"/>
+            <VariableRef variableId="V_CP_FunctionTag"/>
+            <VariableRef variableId="V_CP_LocationTag"/>
+          </Menu>
+          <Menu id="M_OMSR_Observe">
+            <!-- top level menu -->
+            <VariableRef variableId="V_DeviceStatus"/>
+            <MenuRef menuId="M_OMSR_XPFV_ObserveDataPLA"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFV_ObserveDataPLA">
+            <Name textId="TN_M_XPFS_ObserveData"/>
+            <!-- level 2 menu -->
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="2"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="3"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="4" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="5"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="6"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="7" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="8"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="9"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="10" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="11"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="12"/>
+            <RecordItemRef variableId="V_XPFS_ObserveData" subindex="13"/>
+          </Menu>
+          <Menu id="M_OR_Param">
+            <!-- top level menu -->
+            <MenuRef menuId="M_OR_XPFS_Param_Oper"/>
+            <MenuRef menuId="M_OR_XPFS_Param_ConfSens"/>
+            <MenuRef menuId="M_OR_XPFS_Param_ConfMaintenance"/>
+            <MenuRef menuId="M_OR_XPFS_Param_ConfEvent"/>
+            <MenuRef menuId="M_OR_XPFS_Param_ConfIO"/>
+          </Menu>
+          <Menu id="M_MSR_Param">
+            <!-- top level menu -->
+            <MenuRef menuId="M_MSR_XPFS_Param_Oper"/>
+            <MenuRef menuId="M_MSR_XPFS_Param_ConfSens"/>
+            <MenuRef menuId="M_MSR_XPFS_Param_ConfMaintenance"/>
+            <MenuRef menuId="M_MSR_XPFS_Param_ConfEvent"/>
+            <MenuRef menuId="M_MSR_XPFS_Param_ConfIO"/>
+            <MenuRef menuId="M_MSR_CP_Param_GeneralSettings"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Param_Oper">
+            <Name textId="TN_M_XPFS_Param_Oper"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC11"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC12"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC21"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC22"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC31"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC32"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC41"/>
+            <MenuRef menuId="M_OR_XPFV_Param_SSC42"/>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Param_Oper">
+            <Name textId="TN_M_XPFS_Param_Oper"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC11"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC12"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC21"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC22"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC31"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC32"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC41"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_SSC42"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC11">
+            <Name textId="TN_M_XPFV_Param_SSC11Vrms"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC11_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC11">
+            <Name textId="TN_M_XPFV_Param_SSC11Vrms"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC11_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC11_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC12">
+            <Name textId="TN_M_XPFV_Param_SSC12Vrms"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC12_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC12">
+            <Name textId="TN_M_XPFV_Param_SSC12Vrms"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC12_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC12_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC21">
+            <Name textId="TN_M_XPFV_Param_SSC21Arms"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC21_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC21">
+            <Name textId="TN_M_XPFV_Param_SSC21Arms"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC21_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC21_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC22">
+            <Name textId="TN_M_XPFV_Param_SSC22Arms"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC22_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC22">
+            <Name textId="TN_M_XPFV_Param_SSC22Arms"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC22_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC22_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC31">
+            <Name textId="TN_M_XPFV_Param_SSC31Apeak"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC31_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC31">
+            <Name textId="TN_M_XPFV_Param_SSC31Apeak"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC31_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC31_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC32">
+            <Name textId="TN_M_XPFV_Param_SSC32Apeak"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Config" subindex="2" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_SSC32_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC32">
+            <Name textId="TN_M_XPFV_Param_SSC32Apeak"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Param" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Param" subindex="2" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC32_Config" subindex="2"/>
+            <VariableRef variableId="V_XPFV_SSC32_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC41">
+            <Name textId="TN_M_XPFV_Param_SSC41Temp"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1000"/>
+            <VariableRef variableId="V_XPFV_SSC41_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC41">
+            <Name textId="TN_M_XPFV_Param_SSC41Temp"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Param" subindex="1" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Param" subindex="2" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_SSC41_Config" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1000"/>
+            <VariableRef variableId="V_XPFV_SSC41_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_SSC42">
+            <Name textId="TN_M_XPFV_Param_SSC42Temp"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Param" subindex="1" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Param" subindex="2" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="1" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1000"/>
+            <VariableRef variableId="V_XPFV_SSC42_OffDelay" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_SSC42">
+            <Name textId="TN_M_XPFV_Param_SSC42Temp"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Param" subindex="1" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Param" subindex="2" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="1"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_SSC42_Config" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1000"/>
+            <VariableRef variableId="V_XPFV_SSC42_OffDelay" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1056"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Param_ConfSens">
+            <Name textId="TN_M_XPFS_Param_ConfSens"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFV_Eval_Filter" accessRightRestriction="ro"/>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Param_ConfSens">
+            <Name textId="TN_M_XPFS_Param_ConfSens"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFV_Eval_Filter"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Param_ConfMaintenance">
+            <Name textId="TN_M_XPFS_Param_ConfMaintenance"/>
+            <!-- level 2 menu -->
+            <MenuRef menuId="M_OR_XPFV_Param_ConfMaintenanceVrms"/>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfMaintenanceArms"/>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfMaintenanceApeak"/>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfMaintenanceTemp"/>
+            <VariableRef variableId="V_XPFV_Maintenance_ConfigOper" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Param_ConfMaintenance">
+            <Name textId="TN_M_XPFS_Param_ConfMaintenance"/>
+            <!-- level 2 menu -->
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfMaintenanceVrms"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfMaintenanceArms"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfMaintenanceApeak"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfMaintenanceTemp"/>
+            <VariableRef variableId="V_XPFV_Maintenance_ConfigOper" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfMaintenanceVrms">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceVrms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfMaintenanceVrms">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceVrms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigVrms" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfMaintenanceArms">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceArms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfMaintenanceArms">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceArms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigArms" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfMaintenanceApeak">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceApeak"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="1" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfMaintenanceApeak">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceApeak"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="1" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigApeak" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfMaintenanceTemp">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceTemp"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="1" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="3" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfMaintenanceTemp">
+            <Name textId="TN_M_XPFV_Param_ConfMaintenanceTemp"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="1" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="2"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_ConfigTemp" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Param_ConfEvent">
+            <Name textId="TN_M_XPFS_Param_ConfEvent"/>
+            <!-- level 2 menu -->
+            <RecordItemRef variableId="V_XPFS_Event_Config" subindex="1" accessRightRestriction="ro"/>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Param_ConfEvent">
+            <Name textId="TN_M_XPFS_Param_ConfEvent"/>
+            <!-- level 2 menu -->
+            <RecordItemRef variableId="V_XPFS_Event_Config" subindex="1"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Param_ConfIO">
+            <Name textId="TN_M_XPFS_Param_ConfIO"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFV_IO_CQOutFunc" accessRightRestriction="ro"/>
+            <VariableRef variableId="V_XPFV_IO_IQOutFunc" accessRightRestriction="ro"/>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfIO_AOVrms">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="11"/>
+            </MenuRef>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfIO_AOArms">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="12"/>
+            </MenuRef>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfIO_AOApeak">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="13"/>
+            </MenuRef>
+            <MenuRef menuId="M_OR_XPFV_Param_ConfIO_AOTemp">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="14"/>
+            </MenuRef>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Param_ConfIO">
+            <Name textId="TN_M_XPFS_Param_ConfIO"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFV_IO_CQOutFunc"/>
+            <VariableRef variableId="V_XPFV_IO_IQOutFunc"/>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfIO_AOVrms">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="11"/>
+            </MenuRef>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfIO_AOArms">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="12"/>
+            </MenuRef>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfIO_AOApeak">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="13"/>
+            </MenuRef>
+            <MenuRef menuId="M_MSR_XPFV_Param_ConfIO_AOTemp">
+              <Condition variableId="V_XPFV_IO_IQOutFunc" value="14"/>
+            </MenuRef>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfIO_AOVrms">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOVrms"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamVrms" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfIO_AOVrms">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOVrms"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamVrms" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1062"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfIO_AOArms">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOArms"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamArms" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfIO_AOArms">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOArms"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamArms" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfIO_AOApeak">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOApeak"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamApeak" accessRightRestriction="ro" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfIO_AOApeak">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOApeak"/>
+            <!-- level 3 menu -->
+            <VariableRef variableId="V_XPFV_IO_AOParamApeak" displayFormat="Dec.2" gradient="0.01" offset="0.00" unitCode="1658"/>
+          </Menu>
+          <Menu id="M_OR_XPFV_Param_ConfIO_AOTemp">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOTemp"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_IO_AOParamTemp" subindex="1" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_IO_AOParamTemp" subindex="2" accessRightRestriction="ro" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+          </Menu>
+          <Menu id="M_MSR_XPFV_Param_ConfIO_AOTemp">
+            <Name textId="TN_M_XPFV_Param_ConfIO_AOTemp"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_IO_AOParamTemp" subindex="1" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFV_IO_AOParamTemp" subindex="2" displayFormat="Dec.0" gradient="1.00" offset="0.00" unitCode="1001"/>
+          </Menu>
+          <Menu id="M_MSR_CP_Param_GeneralSettings">
+            <Name textId="TN_M_CP_Param_GeneralSettings"/>
+            <VariableRef variableId="V_SystemCommand">
+              <Button buttonValue="129">
+                <Description textId="TD_STD_SystemCommand_ApplicationReset"/>
+              </Button>
+            </VariableRef>
+          </Menu>
+          <Menu id="M_OR_Diag">
+            <!-- top level menu -->
+            <MenuRef menuId="M_OMSR_CP_Diag_DeviceStatusInfo"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoOper"/>
+            <MenuRef menuId="M_OR_XPFS_Diag_InfoMaintenance"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoDevice"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoMeasData"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoComm"/>
+          </Menu>
+          <Menu id="M_MSR_Diag">
+            <!-- top level menu -->
+            <MenuRef menuId="M_OMSR_CP_Diag_DeviceStatusInfo"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoOper"/>
+            <MenuRef menuId="M_MSR_XPFS_Diag_InfoMaintenance"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoDevice"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoMeasData"/>
+            <MenuRef menuId="M_OMSR_XPFS_Diag_InfoComm"/>
+            <MenuRef menuId="M_MSR_CP_Diag_ServiceFunctions"/>
+          </Menu>
+          <Menu id="M_OMSR_CP_Diag_DeviceStatusInfo">
+            <Name textId="TN_M_CP_Diag_DeviceStatusInfo"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_DeviceStatus"/>
+            <VariableRef variableId="V_DetailedDeviceStatus"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFS_Diag_InfoOper">
+            <Name textId="TN_M_XPFS_Diag_InfoOper"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFS_OPM_OperHour" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1059"/>
+            <VariableRef variableId="V_XPFS_OPM_TempInd"/>
+            <RecordItemRef variableId="V_XPFS_OPM_TempMon" subindex="5" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFS_OPM_TempMon" subindex="3" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFS_OPM_TempMon" subindex="4" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1001"/>
+            <RecordItemRef variableId="V_XPFS_OPM_TempMon" subindex="1" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+            <RecordItemRef variableId="V_XPFS_OPM_TempMon" subindex="2"/>
+            <RecordItemRef variableId="V_XPFS_OPM_PowerMon" subindex="4" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1054"/>
+            <RecordItemRef variableId="V_XPFS_OPM_PowerMon" subindex="1"/>
+            <RecordItemRef variableId="V_XPFS_OPM_PowerMon" subindex="2" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1054"/>
+            <RecordItemRef variableId="V_XPFS_OPM_PowerMon" subindex="3" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1054"/>
+          </Menu>
+          <Menu id="M_OR_XPFS_Diag_InfoMaintenance">
+            <Name textId="TN_M_XPFS_Diag_InfoMaintenance"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_XPFV_Maintenance_Status"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceVrms"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceArms"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceApeak"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceTemp"/>
+            <VariableRef variableId="V_XPFV_Maintenance_MonOperTime" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_MSR_XPFS_Diag_InfoMaintenance">
+            <Name textId="TN_M_XPFS_Diag_InfoMaintenance"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_SystemCommand">
+              <Button buttonValue="176">
+                <Description textId="TD_XPFS_SystemCommand_MaintenanceReset"/>
+                <ActionStartedMessage textId="TD_XPFS_SystemCommand_ActMaintenanceReset"/>
+              </Button>
+            </VariableRef>
+            <VariableRef variableId="V_XPFV_Maintenance_Status"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceVrms"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceArms"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceApeak"/>
+            <MenuRef menuId="M_OMSR_XPFV_Diag_InfoMaintenanceTemp"/>
+            <VariableRef variableId="V_XPFV_Maintenance_MonOperTime" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFV_Diag_InfoMaintenanceVrms">
+            <Name textId="TN_M_XPFV_Diag_InfoMaintenanceVrms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonVrms" subindex="1" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonVrms" subindex="2" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1997"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFV_Diag_InfoMaintenanceArms">
+            <Name textId="TN_M_XPFV_Diag_InfoMaintenanceArms"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonArms" subindex="1" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonArms" subindex="2" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1997"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFV_Diag_InfoMaintenanceApeak">
+            <Name textId="TN_M_XPFV_Diag_InfoMaintenanceApeak"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonApeak" subindex="1" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonApeak" subindex="2" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1997"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFV_Diag_InfoMaintenanceTemp">
+            <Name textId="TN_M_XPFV_Diag_InfoMaintenanceTemp"/>
+            <!-- level 3 menu -->
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonTemp" subindex="1" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1059"/>
+            <RecordItemRef variableId="V_XPFV_Maintenance_MonTemp" subindex="2" displayFormat="Dec.0" gradient="1.0" offset="0.0" unitCode="1997"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFS_Diag_InfoDevice">
+            <Name textId="TN_M_XPFS_Diag_InfoDevice"/>
+            <!-- level 2 menu -->
+            <RecordItemRef variableId="V_XPFS_Device_Char" subindex="1"/>
+            <RecordItemRef variableId="V_XPFS_Device_Char" subindex="2"/>
+            <RecordItemRef variableId="V_XPFS_Device_Char" subindex="3" displayFormat="Dec.0" gradient="1.00" offset="0.0" unitCode="1211"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFS_Diag_InfoMeasData">
+            <Name textId="TN_M_XPFS_Diag_InfoMeasData"/>
+            <VariableRef variableId="V_XPFV_MDC1_Descriptor"/>
+            <VariableRef variableId="V_XPFV_MDC2_Descriptor"/>
+            <VariableRef variableId="V_XPFV_MDC3_Descriptor"/>
+            <VariableRef variableId="V_XPFV_MDC4_Descriptor"/>
+          </Menu>
+          <Menu id="M_OMSR_XPFS_Diag_InfoComm">
+            <Name textId="TN_M_XPFS_Diag_InfoComm"/>
+            <!-- level 2 menu -->
+            <RecordItemRef variableId="V_DirectParameters_1" subindex="3" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_DirectParameters_1" subindex="2" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_DirectParameters_1" subindex="5" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_DirectParameters_1" subindex="6" accessRightRestriction="ro"/>
+            <RecordItemRef variableId="V_DirectParameters_1" subindex="7" accessRightRestriction="ro"/>
+          </Menu>
+          <Menu id="M_MSR_CP_Diag_ServiceFunctions">
+            <Name textId="TN_M_CP_Diag_ServiceFunctions"/>
+            <!-- level 2 menu -->
+            <VariableRef variableId="V_SystemCommand">
+              <Button buttonValue="131">
+                <Description textId="TD_STD_SystemCommand_BackToBox"/>
+              </Button>
+            </VariableRef>
+          </Menu>
+        </MenuCollection>
+        <ObserverRoleMenuSet>
+          <IdentificationMenu menuId="M_OR_Ident"/>
+          <ParameterMenu menuId="M_OR_Param"/>
+          <ObservationMenu menuId="M_OMSR_Observe"/>
+          <DiagnosisMenu menuId="M_OR_Diag"/>
+        </ObserverRoleMenuSet>
+        <MaintenanceRoleMenuSet>
+          <IdentificationMenu menuId="M_MSR_Ident"/>
+          <ParameterMenu menuId="M_MSR_Param"/>
+          <ObservationMenu menuId="M_OMSR_Observe"/>
+          <DiagnosisMenu menuId="M_MSR_Diag"/>
+        </MaintenanceRoleMenuSet>
+        <SpecialistRoleMenuSet>
+          <IdentificationMenu menuId="M_MSR_Ident"/>
+          <ParameterMenu menuId="M_MSR_Param"/>
+          <ObservationMenu menuId="M_OMSR_Observe"/>
+          <DiagnosisMenu menuId="M_MSR_Diag"/>
+        </SpecialistRoleMenuSet>
+      </UserInterface>
+    </DeviceFunction>
+  </ProfileBody>
+  <CommNetworkProfile xsi:type="IOLinkCommNetworkProfileT" iolinkRevision="V1.1">
+    <TransportLayers>
+      <PhysicalLayer bitrate="COM2" minCycleTime="5000" sioSupported="true" mSequenceCapability="43">
+        <Connection xsi:type="M12-4ConnectionT" connectionSymbol="Pepperl-Fuchs-PD-B153208A-con-pic.png">
+          <ProductRef productId="70140695-100001"/>
+          <Description textId="TD_ProductConnector_70140695-100001"/>
+          <Wire1 color="BN" function="L+"/>
+          <Wire2 color="WH" function="Other"/>
+          <Wire3 color="BU" function="L-"/>
+          <Wire4 color="BK" function="C/Q"/>
+        </Connection>
+      </PhysicalLayer>
+    </TransportLayers>
+    <Test>
+      <Config1 index="96" testValue="0x03"/>
+      <Config2 index="256" testValue="0x01"/>
+      <Config3 index="24" testValue="0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20"/>
+      <Config7 index="254">
+        <EventTrigger appearValue="01" disappearValue="02"/>
+        <EventTrigger appearValue="03" disappearValue="04"/>
+      </Config7>
+    </Test>
+  </CommNetworkProfile>
+  <ExternalTextCollection>
+    <PrimaryLanguage xml:lang="en">
+      <Text id="T_VendorText" value="Pepperl+Fuchs"/>
+      <Text id="T_VendorUrl" value="https://www.pepperl-fuchs.com/io-link"/>
+      <Text id="T_DeviceName" value="VIM32PL-*A*-0*-*01"/>
+      <Text id="T_DeviceFamily" value="Vibration Sensor"/>
+      <Text id="TN_ProductName_70140695-100001" value="VIM32PL-E1AC8-0RE-IO-1V1401"/>
+      <Text id="TD_ProductDescr_70140695-100001" value="Vibration sensor, V2A housing, external thread, 10 .. 1000 Hz, velocity rms and acceleration rms and acceleration peak and temperature, 128 mm/s and 14 g (peak), IP67, M12 plug, 4-pin, default setting 01"/>
+      <Text id="TD_ProductConnector_70140695-100001" value="Plug, M12, 4-pin"/>
+      <Text id="TN_V_CP_FunctionTag" value="Function Tag"/>
+      <Text id="TD_V_CP_FunctionTag" value="Possibility to mark a device with function-specific information."/>
+      <Text id="TN_V_CP_LocationTag" value="Location Tag"/>
+      <Text id="TD_V_CP_LocationTag" value="Possibility to mark a device with location-specific information."/>
+      <Text id="TN_V_CP_ProductURI" value="Product URI"/>
+      <Text id="TD_V_CP_ProductURI" value="Provides a unique instance identification compliant to DIN-SPEC 91406."/>
+      <Text id="TD_STD_SystemCommand_ApplicationReset" value="The parameter of the technology-specific application are set to default values. Identification parameter remain unchanged. An upload to the data storage of the master will be executed, if activated in the port configuration of the master."/>
+      <Text id="TD_STD_SystemCommand_BackToBox" value="The parameter of the device are set to factory default values and communication will be inhibited until the next power cycle. Note: Directly detach the device from the master port!"/>
+      <Text id="TN_PI_XPFS_PDin" value="PD Input"/>
+      <Text id="TN_SV_XPFS_State_active" value="Active"/>
+      <Text id="TN_SV_XPFS_State_inactive" value="Inactive"/>
+      <Text id="TN_SV_XPFS_SSC_State_high" value="High"/>
+      <Text id="TN_SV_XPFS_SSC_State_low" value="Low"/>
+      <Text id="TN_SV_XPFS_MV_nomeasdata" value="No Measurement Data"/>
+      <Text id="TN_V_XPFV_MDC1_MV" value="MDC1 - vRMS"/>
+      <Text id="TD_V_XPFV_MDC1_MV" value="Shows the current velocity rms measurement value of measurement data channel 1."/>
+      <Text id="TN_V_XPFV_MDC1_Scale" value="MDC1 - Scale"/>
+      <Text id="TD_V_XPFV_MDC1_Scale" value="Shows the multiplier for the velocity rms measurement value of measurement data channel 1 - 10exp(scale)."/>
+      <Text id="TN_V_XPFV_SSC11" value="SSC1.1 - vRMS"/>
+      <Text id="TD_V_XPFV_SSC11" value="Indicates the current status of the velocity rms switching signal 1.1 for measurement data channel 1."/>
+      <Text id="TN_V_XPFV_SSC12" value="SSC1.2 - vRMS"/>
+      <Text id="TD_V_XPFV_SSC12" value="Indicates the current status of the velocity rms switching signal 1.2 for measurement data channel 1."/>
+      <Text id="TN_V_XPFV_MDC2_MV" value="MDC2 - aRMS"/>
+      <Text id="TD_V_XPFV_MDC2_MV" value="Shows the current acceleration rms measurement value of measurement data channel 2."/>
+      <Text id="TN_V_XPFV_MDC2_Scale" value="MDC2 - Scale"/>
+      <Text id="TD_V_XPFV_MDC2_Scale" value="Shows the multiplier for the acceleration rms measurement value of measurement data channel 2 - 10exp(scale)."/>
+      <Text id="TN_V_XPFV_SSC21" value="SSC2.1 - aRMS"/>
+      <Text id="TD_V_XPFV_SSC21" value="Indicates the current status of the acceleration rms switching signal 2.1 for measurement data channel 2."/>
+      <Text id="TN_V_XPFV_SSC22" value="SSC2.2 - aRMS"/>
+      <Text id="TD_V_XPFV_SSC22" value="Indicates the current status of the acceleration rms switching signal 2.2 for measurement data channel 2."/>
+      <Text id="TN_V_XPFV_MDC3_MV" value="MDC3 - aPeak"/>
+      <Text id="TD_V_XPFV_MDC3_MV" value="Shows the current acceleration peak measurement value of measurement data channel 3."/>
+      <Text id="TN_V_XPFV_MDC3_Scale" value="MDC3 - Scale"/>
+      <Text id="TD_V_XPFV_MDC3_Scale" value="Shows the multiplier for the acceleration peak measurement value of measurement data channel 3 - 10exp(scale)."/>
+      <Text id="TN_V_XPFV_SSC31" value="SSC3.1 - aPeak"/>
+      <Text id="TD_V_XPFV_SSC31" value="Indicates the current status of the acceleration peak switching signal 3.1 for measurement data channel 3."/>
+      <Text id="TN_V_XPFV_SSC32" value="SSC3.2 - aPeak"/>
+      <Text id="TD_V_XPFV_SSC32" value="Indicates the current status of the acceleration peak switching signal 3.2 for measurement data channel 3."/>
+      <Text id="TN_V_XPFV_MDC4_MV" value="MDC4 - Temperature"/>
+      <Text id="TD_V_XPFV_MDC4_MV" value="Shows the current temperature measurement value of measurement data channel 4."/>
+      <Text id="TN_V_XPFV_MDC4_Scale" value="MDC4 - Scale"/>
+      <Text id="TD_V_XPFV_MDC4_Scale" value="Shows the multiplier for the temperature measurement value of measurement data channel 4 - 10exp(scale)."/>
+      <Text id="TN_V_XPFV_SSC41" value="SSC4.1 - Temperature"/>
+      <Text id="TD_V_XPFV_SSC41" value="Indicates the current status of the temperature switching signal 4.1 for measurement data channel 4."/>
+      <Text id="TN_V_XPFV_SSC42" value="SSC4.2 - Temperature"/>
+      <Text id="TD_V_XPFV_SSC42" value="Indicates the current status of the temperature switching signal 4.2 for measurement data channel 4."/>
+      <Text id="TN_V_XPFV_DSC1_MaintenanceWarning" value="DSC.1 - Maintenance Warning"/>
+      <Text id="TD_V_XPFV_DSC1_MaintenanceWarning" value="Indicates that at least one of the configured maintenance limits has been exceeded."/>
+      <Text id="TN_V_XPFS_SSC_SP1" value="SP1"/>
+      <Text id="TD_V_XPFS_SSC_SP1" value="Defines the setpoint 1 value for the switching signal channel."/>
+      <Text id="TN_V_XPFS_SSC_SP2" value="SP2"/>
+      <Text id="TD_V_XPFS_SSC_SP2" value="Defines the setpoint 2 value for the switching signal channel."/>
+      <Text id="TN_V_XPFV_SSC11_ParamVrms" value="SSC1.1 Param vRMS"/>
+      <Text id="TD_V_XPFV_SSC11_ParamVrms" value="Defines the setpoint values for switching signal channel 1.1 vRMS."/>
+      <Text id="TN_V_XPFV_SSC12_ParamVrms" value="SSC1.2 Param vRMS"/>
+      <Text id="TD_V_XPFV_SSC12_ParamVrms" value="Defines the setpoint values for switching signal channel 1.2 vRMS."/>
+      <Text id="TN_V_XPFV_SSC21_ParamArms" value="SSC2.1 Param aRMS"/>
+      <Text id="TD_V_XPFV_SSC21_ParamArms" value="Defines the setpoint values for switching signal channel 2.1 aRMS."/>
+      <Text id="TN_V_XPFV_SSC22_ParamArms" value="SSC2.2 Param aRMS"/>
+      <Text id="TD_V_XPFV_SSC22_ParamArms" value="Defines the setpoint values for switching signal channel 2.2 aRMS."/>
+      <Text id="TN_V_XPFV_SSC31_ParamApeak" value="SSC3.1 Param aPeak"/>
+      <Text id="TD_V_XPFV_SSC31_ParamApeak" value="Defines the setpoint values for switching signal channel 3.1 aPeak."/>
+      <Text id="TN_V_XPFV_SSC32_ParamApeak" value="SSC3.2 Param aPeak"/>
+      <Text id="TD_V_XPFV_SSC32_ParamApeak" value="Defines the setpoint values for switching signal channel 3.2 aPeak."/>
+      <Text id="TN_V_XPFV_SSC41_ParamTemp" value="SSC4.1 Param Temperature"/>
+      <Text id="TD_V_XPFV_SSC41_ParamTemp" value="Defines the setpoint values for switching signal channel 4.1 Temperature."/>
+      <Text id="TN_V_XPFV_SSC42_ParamTemp" value="SSC4.2 Param Temperature"/>
+      <Text id="TD_V_XPFV_SSC42_ParamTemp" value="Defines the setpoint values for switching signal channel 4.2 Temperature."/>
+      <Text id="TN_V_XPFS_SSC_Logic" value="Logic"/>
+      <Text id="TD_V_XPFS_SSC_Logic" value="Defines the logical representation of the switching signal SSC in the process data."/>
+      <Text id="TN_V_XPFS_SSC_Mode" value="Mode"/>
+      <Text id="TD_V_XPFS_SSC_Mode" value="Defines the evaluation mode for the switching signal SSC."/>
+      <Text id="TN_V_XPFS_SSC_Hysteresis" value="Hysteresis"/>
+      <Text id="TD_V_XPFS_SSC_Hysteresis" value="Defines the hysteresis at the switchpoint. A higher hysteresis may help to increase stability in critical applications."/>
+      <Text id="TN_SV_XPFS_SSC_Logic_highactive" value="High active"/>
+      <Text id="TN_SV_XPFS_SSC_Logic_lowactive" value="Low active"/>
+      <Text id="TN_SV_XPFS_SSC_Mode_deactivated" value="Deactivated"/>
+      <Text id="TN_SV_XPFS_SSC_Mode_singlepoint" value="Single point"/>
+      <Text id="TN_SV_XPFS_SSC_Mode_window" value="Window"/>
+      <Text id="TN_SV_XPFS_SSC_Hysteresis_fix" value="Fix"/>
+      <Text id="TN_V_XPFV_SSC11_ConfigVrms" value="SSC1.1 Config vRMS"/>
+      <Text id="TD_V_XPFV_SSC11_ConfigVrms" value="Defines the configuration parameter for switching signal channel 1.1 vRMS."/>
+      <Text id="TN_V_XPFV_SSC12_ConfigVrms" value="SSC1.2 Config vRMS"/>
+      <Text id="TD_V_XPFV_SSC12_ConfigVrms" value="Defines the configuration parameter for switching signal channel 1.2 vRMS."/>
+      <Text id="TN_V_XPFV_SSC21_ConfigArms" value="SSC2.1 Config aRMS"/>
+      <Text id="TD_V_XPFV_SSC21_ConfigArms" value="Defines the configuration parameter for switching signal channel 2.1 aRMS."/>
+      <Text id="TN_V_XPFV_SSC22_ConfigArms" value="SSC2.2 Config aRMS"/>
+      <Text id="TD_V_XPFV_SSC22_ConfigArms" value="Defines the configuration parameter for switching signal channel 2.2 aRMS."/>
+      <Text id="TN_V_XPFV_SSC31_ConfigApeak" value="SSC3.1 Config aPeak"/>
+      <Text id="TD_V_XPFV_SSC31_ConfigApeak" value="Defines the configuration parameter for switching signal channel 3.1 aPeak."/>
+      <Text id="TN_V_XPFV_SSC32_ConfigApeak" value="SSC3.2 Config aPeak"/>
+      <Text id="TD_V_XPFV_SSC32_ConfigApeak" value="Defines the configuration parameter for switching signal channel 3.2 aPeak."/>
+      <Text id="TN_V_XPFV_SSC41_ConfigTemp" value="SSC4.1 Config Temperature"/>
+      <Text id="TD_V_XPFV_SSC41_ConfigTemp" value="Defines the configuration parameter for switching signal channel 4.1 Temperature."/>
+      <Text id="TN_V_XPFV_SSC42_ConfigTemp" value="SSC4.2 Config Temperature"/>
+      <Text id="TD_V_XPFV_SSC42_ConfigTemp" value="Defines the configuration parameter for switching signal channel 4.2 Temperature."/>
+      <Text id="TN_SV_XPFS_disabled" value="Disabled"/>
+      <Text id="TN_V_XPFV_SSC11_OffDelayVrms" value="SSC1.1 Config Ext vRMS - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC11_OffDelayVrms" value="Defines the minimum duration of a stable inactive state of the vRMS detection signal on the switching signal channel 1.1. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC12_OffDelayVrms" value="SSC1.2 Config Ext vRMS - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC12_OffDelayVrms" value="Defines the minimum duration of a stable inactive state of the vRMS detection signal on the switching signal channel 1.2. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC21_OffDelayArms" value="SSC2.1 Config Ext aRMS - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC21_OffDelayArms" value="Defines the minimum duration of a stable inactive state of the aRMS detection signal on the switching signal channel 2.1. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC22_OffDelayArms" value="SSC2.2 Config Ext aRMS - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC22_OffDelayArms" value="Defines the minimum duration of a stable inactive state of the aRMS detection signal on the switching signal channel 2.2. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC31_OffDelayApeak" value="SSC3.1 Config Ext aPeak - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC31_OffDelayApeak" value="Defines the minimum duration of a stable inactive state of the aPeak detection signal on the switching signal channel 3.1. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC32_OffDelayApeak" value="SSC3.2 Config Ext aPeak - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC32_OffDelayApeak" value="Defines the minimum duration of a stable inactive state of the aPeak detection signal on the switching signal channel 3.2. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC41_OffDelayTemp" value="SSC4.1 Config Ext Temperature - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC41_OffDelayTemp" value="Defines the minimum duration of a stable inactive state of the temperature detection signal on the switching signal channel 4.1. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_SSC42_OffDelayTemp" value="SSC4.2 Config Ext Temperature - Off Delay"/>
+      <Text id="TD_V_XPFV_SSC42_OffDelayTemp" value="Defines the minimum duration of a stable inactive state of the temperature detection signal on the switching signal channel 4.2. Shorter inactive signals will be suppressed."/>
+      <Text id="TN_V_XPFV_Eval_Filter" value="Eval Config - Signal Filter MDC1, MDC2"/>
+      <Text id="TD_V_XPFV_Eval_Filter" value="Defines the filter bandwidth for vibration signal evaluation. The filter is applied to MDC1 and MDC2 and has a 3rd order Butterworth characteristic. DIN ISO 10816/20816 requires 10 .. 1000 Hz."/>
+      <Text id="TN_SV_XPFV_Eval_Filter_10to1000hz" value="10 .. 1000 Hz"/>
+      <Text id="TN_SV_XPFV_Eval_Filter_10to500hz" value="10 .. 500 Hz"/>
+      <Text id="TN_SV_XPFV_Eval_Filter_10to100hz" value="10 .. 100 Hz"/>
+      <Text id="TN_SV_XPFV_Eval_Filter_10to50hz" value="10 .. 50 Hz"/>
+      <Text id="TN_V_XPFV_IO_CQOutFunc" value="I/O Config - C/Q Output Function"/>
+      <Text id="TD_V_XPFV_IO_CQOutFunc" value="Defines the function of the output signal at C/Q (pin 4) in SIO mode."/>
+      <Text id="TN_V_XPFV_IO_IQOutFunc" value="I/O Config - I/Q  Output Function"/>
+      <Text id="TD_V_XPFV_IO_IQOutFunc" value="Defines the function of the output signal at I/Q (pin 2)."/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_inactive" value="Inactive"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc11" value="SSC1.1 - vRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc12" value="SSC1.2 - vRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc21" value="SSC2.1 - aRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc22" value="SSC2.2 - aRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc31" value="SSC3.1 - aPeak"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc32" value="SSC3.2 - aPeak"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc41" value="SSC4.1 - Temperature"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_ssc42" value="SSC4.2 - Temperature"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_aovrms" value="Analog 4 .. 20 mA - vRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_aoarms" value="Analog 4 .. 20 mA - aRMS"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_aoapeak" value="Analog 4 .. 20 mA - aPeak"/>
+      <Text id="TN_SV_XPFV_IO_OutFunc_aotemp" value="Analog 4 .. 20 mA - Temperature"/>
+      <Text id="TN_V_XPFV_IO_AOParamVrms" value="Analog Out Param vRMS - SP"/>
+      <Text id="TN_V_XPFV_IO_AOParamArms" value="Analog Out Param aRMS - SP"/>
+      <Text id="TN_V_XPFV_IO_AOParamApeak" value="Analog Out Param aPeak - SP"/>
+      <Text id="TD_V_XPFV_IO_AOParam" value="Defines the setpoint value for the maximum value at the analog output."/>
+      <Text id="TN_V_XPFV_IO_AOParamTemp" value="Analog Out Param Temperature"/>
+      <Text id="TD_V_XPFV_IO_AOParamTemp" value="Defines the setpoint values for the minimum and maximum value at the analog output."/>
+      <Text id="TN_V_XPFV_IO_AOParamTemp_SP1" value="SP1"/>
+      <Text id="TD_V_XPFV_IO_AOParamTemp_SP1" value="Defines the setpoint 1 value for the analog output. The lower value of SP1 and SP2 corresponds to the minimum analog output value, the higher value to the maximum analog output value."/>
+      <Text id="TN_V_XPFV_IO_AOParamTemp_SP2" value="SP2"/>
+      <Text id="TD_V_XPFV_IO_AOParamTemp_SP2" value="Defines the setpoint 2 value for the analog output. The lower value of SP1 and SP2 corresponds to the minimum analog output value, the higher value to the maximum analog output value."/>
+      <Text id="TN_V_XPFS_Event_Config" value="Event Config"/>
+      <Text id="TD_V_XPFS_Event_Config" value="Defines which event sources can trigger events."/>
+      <Text id="TN_V_XPFS_Event_Config_MaintenanceRequest" value="Warning - Maintenance Request"/>
+      <Text id="TD_V_XPFS_Event_Config_MaintenanceRequest" value="Enabled: An event is triggered if one of the maintenance alarms gets active."/>
+      <Text id="TN_V_XPFS_Reserved" value="Reserved"/>
+      <Text id="TN_SV_XPFS_DisEnable_disable" value="Disabled"/>
+      <Text id="TN_SV_XPFS_DisEnable_enable" value="Enabled"/>
+      <Text id="TN_V_XPFS_Device_Char" value="Device Characteristics"/>
+      <Text id="TD_V_XPFS_Device_Char" value="Shows relevant key characteristics of the device for use in applications."/>
+      <Text id="TN_V_XPFV_Device_Char_MeasRng" value="Measurement Range"/>
+      <Text id="TD_V_XPFV_Device_Char_MeasRng" value="Shows the maximum measurement range for vibration measurements as specified."/>
+      <Text id="TN_SV_XPFV_Device_Char_MeasRng_low" value="0 .. 128 mm/s / 0 .. 14 g (peak)"/>
+      <Text id="TN_SV_XPFV_Device_Char_MeasRng_high" value="0 .. 128 mm/s / -48 .. 48 g (peak)"/>
+      <Text id="TN_V_XPFV_Device_Char_MeasBandwidth" value="Measurement Bandwidth"/>
+      <Text id="TD_V_XPFV_Device_Char_MeasBandwidth" value="Shows the maximum frequency range for vibration measurements as specified."/>
+      <Text id="TN_SV_XPFV_Device_Char_MeasBandwidth_small" value="10 .. 1000 Hz"/>
+      <Text id="TN_SV_XPFV_Device_Char_MeasBandwidth_wide" value="1 .. 12000 Hz"/>
+      <Text id="TN_V_XPFS_Device_Char_SupplyCurrMax" value="Supply Current Requirement"/>
+      <Text id="TD_V_XPFS_Device_Char_SupplyCurrMax" value="Shows the maximum specified supply current for the device excluding load."/>
+      <Text id="TN_V_XPFV_MDC1_Descriptor" value="MDC1 Descriptor vRMS"/>
+      <Text id="TD_V_XPFV_MDC1_Descriptor" value="Descriptor for the characteristic of the measurement data channel 1 (process data MV)."/>
+      <Text id="TN_V_XPFV_MDC2_Descriptor" value="MDC2 Descriptor aRMS"/>
+      <Text id="TD_V_XPFV_MDC2_Descriptor" value="Descriptor for the characteristic of the measurement data channel 2 (process data MV)."/>
+      <Text id="TN_V_XPFV_MDC3_Descriptor" value="MDC3 Descriptor aPeak"/>
+      <Text id="TD_V_XPFV_MDC3_Descriptor" value="Descriptor for the characteristic of the measurement data channel 3 (process data MV)."/>
+      <Text id="TN_V_XPFV_MDC4_Descriptor" value="MDC4 Descriptor Temperature"/>
+      <Text id="TD_V_XPFV_MDC4_Descriptor" value="Descriptor for the characteristic of the measurement data channel 4 (process data MV)."/>
+      <Text id="TN_V_XPFS_MDC_Descriptor_LowerValue" value="Lower Value"/>
+      <Text id="TD_V_XPFS_MDC_Descriptor_LowerValue" value="Shows the lower value of measurement range."/>
+      <Text id="TN_V_XPFS_MDC_Descriptor_UpperValue" value="Upper Value"/>
+      <Text id="TD_V_XPFS_MDC_Descriptor_UpperValue" value="Shows the upper value of measurement range."/>
+      <Text id="TN_V_XPFS_MDC_Descriptor_UnitCode" value="Unit Code"/>
+      <Text id="TD_V_XPFS_MDC_Descriptor_UnitCode" value="Shows the unique code for the physical unit."/>
+      <Text id="TN_V_XPFS_MDC_Descriptor_Scale" value="Scale"/>
+      <Text id="TD_V_XPFS_MDC_Descriptor_Scale" value="Shows the multiplier for measurement value - 10exp(scale)."/>
+      <Text id="TN_V_XPFV_Maintenance_ConfigVrms" value="Maintenance Config vRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_ConfigVrms" value="Provides settings for configuration of vRMS maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_ThreshVrms" value="Overrun Threshold"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_ThreshVrms" value="Defines the threshold for triggering of vRMS maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_ConfigArms" value="Maintenance Config aRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_ConfigArms" value="Provides settings for configuration of aRMS maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_ThreshArms" value="Overrun Threshold"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_ThreshArms" value="Defines the threshold for triggering of aRMS maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_ConfigApeak" value="Maintenance Config aPeak"/>
+      <Text id="TD_V_XPFV_Maintenance_ConfigApeak" value="Provides settings for configuration of aPeak maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_ThreshApeak" value="Overrun Threshold"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_ThreshApeak" value="Defines the threshold for triggering of aPeak maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_ConfigTemp" value="Maintenance Config Temperature"/>
+      <Text id="TD_V_XPFV_Maintenance_ConfigTemp" value="Provides settings for configuration of temperature maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_ThreshTemp" value="Overrun Threshold"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_ThreshTemp" value="Defines the threshold for triggering of temperature maintenance monitoring."/>
+      <Text id="TN_V_XPFV_Maintenance_ConfigOper" value="Maintenance Config Operating Time"/>
+      <Text id="TD_V_XPFV_Maintenance_ConfigOper" value="Defines the limit for the accumulated operating time for a planned maintenance cycle in hours. The according maintenance alarm will be set, if this limit is exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_CountLimit" value="Incident Count Limit"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_CountLimit" value="Defines the limit for the number of transitions above the 'Overrun Threshold'. The according maintenance alarm will be set, if this limit is exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Config_OperLimit" value="Incident Operating Limit"/>
+      <Text id="TD_V_XPFV_Maintenance_Config_OperLimit" value="Defines the limit for the accumulated operating time in hours above the 'Overrun Threshold'. The according maintenance alarm will be set, if this limit is exceeded."/>
+      <Text id="TN_SV_XPFV_Maintenance_Config_disable" value="Disabled"/>
+      <Text id="TN_V_XPFV_Maintenance_Status" value="Maintenance Status Diag"/>
+      <Text id="TD_V_XPFV_Maintenance_Status" value="Shows the diagnosis status of the different maintenance evaluation channels."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_OperVrms" value="Operating Time Alarm vRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_OperVrms" value="Indicates if the configured maximum time for operation above the vRMS threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_CountVrms" value="Count Alarm vRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_CountVrms" value="Indicates if the configured maximum count for operation above the vRMS threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_OperArms" value="Operating Time Alarm aRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_OperArms" value="Indicates if the configured maximum time for operation above the aRMS threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_CountArms" value="Count Alarm aRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_CountArms" value="Indicates if the configured maximum count for operation above the aRMS threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_OperApeak" value="Operating Time Alarm aPeak"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_OperApeak" value="Indicates if the configured maximum time for operation above the aPeak threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_CountApeak" value="Count Alarm aPeak"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_CountApeak" value="Indicates if the configured maximum count for operation above the aPeak threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_OperTemp" value="Operating Time Alarm Temperature"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_OperTemp" value="Indicates if the configured maximum time for operation above the temperature threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_CountTemp" value="Count Alarm Temperature"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_CountTemp" value="Indicates if the configured maximum count for operation above the temperature threshold has been exceeded."/>
+      <Text id="TN_V_XPFV_Maintenance_Status_OperTime" value="Operating Time Alarm"/>
+      <Text id="TD_V_XPFV_Maintenance_Status_OperTime" value="Indicates if the configured operating time for a maintenance cycle has been exceeded."/>
+      <Text id="TN_XPFS_SystemCommand_MaintenanceReset" value="Maintenance Reset"/>
+      <Text id="TD_XPFS_SystemCommand_MaintenanceReset" value="The maintenance status and monitor data are reset."/>
+      <Text id="TD_XPFS_SystemCommand_ActMaintenanceReset" value="The maintenance status and monitor data have been reset. A new maintenance monitoring ist started with the configured limits and thresholds."/>
+      <Text id="TN_V_XPFV_Maintenance_MonVrms" value="Maintenance Monitor vRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_MonVrms" value="Shows the accumulated monitor data since the last maintenance reset for the vRMS measurement channel."/>
+      <Text id="TN_V_XPFV_Maintenance_MonArms" value="Maintenance Monitor aRMS"/>
+      <Text id="TD_V_XPFV_Maintenance_MonArms" value="Shows the accumulated monitor data since the last maintenance reset for the aRMS measurement channel."/>
+      <Text id="TN_V_XPFV_Maintenance_MonApeak" value="Maintenance Monitor aPeak"/>
+      <Text id="TD_V_XPFV_Maintenance_MonApeak" value="Shows the accumulated monitor data since the last maintenance reset for the aPeak measurement channel."/>
+      <Text id="TN_V_XPFV_Maintenance_MonTemp" value="Maintenance Monitor Temperature"/>
+      <Text id="TD_V_XPFV_Maintenance_MonTemp" value="Shows the accumulated monitor data since the last maintenance reset for the temperature measurement channel."/>
+      <Text id="TN_V_XPFV_Maintenance_MonOperTime" value="Operating Time Since Maintenance"/>
+      <Text id="TD_V_XPFV_Maintenance_MonOperTime" value="Shows the time in hours in powered operation since the last maintenance reset."/>
+      <Text id="TN_V_XPFV_Maintenance_Mon_OverrunTime" value="Overrun Time"/>
+      <Text id="TD_V_XPFV_Maintenance_Mon_OverrunTime" value="Shows the accumulated operating time in hours of operation above the configured threshold since the last maintenance reset."/>
+      <Text id="TN_V_XPFV_Maintenance_Mon_OverrunCount" value="Overrun Count"/>
+      <Text id="TD_V_XPFV_Maintenance_Mon_OverrunCount" value="Shows the number of transitions above the configured threshold since the last maintenance reset."/>
+      <Text id="TN_V_XPFS_OPM_OperHour" value="Operating Hours"/>
+      <Text id="TD_V_XPFS_OPM_OperHour" value="Shows the overall hours of operation since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_TempInd" value="Temperature Indicator"/>
+      <Text id="TD_V_XPFS_OPM_TempInd" value="Indicates the operation at ambient temperatures close to or in excess of specification limits."/>
+      <Text id="TN_SV_XPFS_OPM_TempInd_safe" value="Operating condition OK"/>
+      <Text id="TN_SV_XPFS_OPM_TempInd_criticalhigh" value="Close to upper limit"/>
+      <Text id="TN_SV_XPFS_OPM_TempInd_overtemp" value="Upper limit exceeded"/>
+      <Text id="TN_SV_XPFS_OPM_TempInd_criticallow" value="Close to lower limit"/>
+      <Text id="TN_SV_XPFS_OPM_TempInd_undertemp" value="Lower limit exceeded"/>
+      <Text id="TN_V_XPFS_OPM_TempMon" value="Temperature Monitor"/>
+      <Text id="TD_V_XPFS_OPM_TempMon" value="Contains parameters showing current and past conditions of temperature exposure since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_OVTOperHour" value="Overtemperature Operating Hours"/>
+      <Text id="TD_V_XPFS_OPM_OVTOperHour" value="Shows the overall hours of powered operation above the specified temperature limit since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_OVTExceedCount" value="Overtemperature Exceeded Counter"/>
+      <Text id="TD_V_XPFS_OPM_OVTExceedCount" value="Shows the number of transitions to operating temperatures above the specified limit in powered operation since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_TempMax" value="Maximum Operating Temperature"/>
+      <Text id="TD_V_XPFS_OPM_TempMax" value="Shows the maximum observed temperature in powered operation since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_TempMin" value="Minimum Operating Temperature"/>
+      <Text id="TD_V_XPFS_OPM_TempMin" value="Shows the minimum observed temperature in powered operation since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_TempCur" value="Device Operating Temperature"/>
+      <Text id="TD_V_XPFS_OPM_TempCur" value="Shows the currently observed operating temperature of the device."/>
+      <Text id="TN_V_XPFS_OPM_PowerMon" value="Power Monitor"/>
+      <Text id="TD_V_XPFS_OPM_PowerMon" value="Contains parameters showing current and past conditions of power cycles since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_PowerCycles" value="Power Cycles"/>
+      <Text id="TD_V_XPFS_OPM_PowerCycles" value="Shows the number of power cycles since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_UptimeMax" value="Maximum Uptime"/>
+      <Text id="TD_V_XPFS_OPM_UptimeMax" value="Shows the maximum observed powered operating time between power cycles in seconds since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_UptimeAvg" value="Average Uptime"/>
+      <Text id="TD_V_XPFS_OPM_UptimeAvg" value="Shows the average observed powered operating time between power cycles in seconds since initial commissioning."/>
+      <Text id="TN_V_XPFS_OPM_UptimeCur" value="Uptime"/>
+      <Text id="TD_V_XPFS_OPM_UptimeCur" value="Shows the current operating time since the last power cycle in seconds."/>
+      <Text id="TN_V_XPFS_ObserveData" value="Observation Data"/>
+      <Text id="TD_V_XPFS_ObserveData" value="Provides a set of relevant data suitable for observation purposes."/>
+      <Text id="TN_EV_XPFS_Warn_MaintenanceRequest" value="Maintenance request"/>
+      <Text id="TD_EV_XPFS_Warn_MaintenanceRequest" value="The limit for a configured maintenance cycle has been reached. Perform the required maintenance actions and apply the 'Maintenance Reset' command."/>
+      <Text id="TN_EV_XPFS_Warn_TempExceeded" value="Ambient temperature outside specified temperature range"/>
+      <Text id="TD_EV_XPFS_Warn_TempExceeded" value="Check sensor environment."/>
+      <Text id="TN_M_XPFS_ObserveData" value="Observation Data"/>
+      <Text id="TN_M_XPFS_Param_Oper" value="Operation Parameter"/>
+      <Text id="TN_M_XPFV_Param_SSC11Vrms" value="Switching Signal Channel 1.1 vRMS"/>
+      <Text id="TN_M_XPFV_Param_SSC12Vrms" value="Switching Signal Channel 1.2 vRMS"/>
+      <Text id="TN_M_XPFV_Param_SSC21Arms" value="Switching Signal Channel 2.1 aRMS"/>
+      <Text id="TN_M_XPFV_Param_SSC22Arms" value="Switching Signal Channel 2.2 aRMS"/>
+      <Text id="TN_M_XPFV_Param_SSC31Apeak" value="Switching Signal Channel 3.1 aPeak"/>
+      <Text id="TN_M_XPFV_Param_SSC32Apeak" value="Switching Signal Channel 3.2 aPeak"/>
+      <Text id="TN_M_XPFV_Param_SSC41Temp" value="Switching Signal Channel 4.1 Temp"/>
+      <Text id="TN_M_XPFV_Param_SSC42Temp" value="Switching Signal Channel 4.2 Temp"/>
+      <Text id="TN_M_XPFS_Param_ConfSens" value="Sensor Configuration"/>
+      <Text id="TN_M_XPFS_Param_ConfMaintenance" value="Maintenance Configuration"/>
+      <Text id="TN_M_XPFV_Param_ConfMaintenanceVrms" value="Maintenance vRMS"/>
+      <Text id="TN_M_XPFV_Param_ConfMaintenanceArms" value="Maintenance aRMS"/>
+      <Text id="TN_M_XPFV_Param_ConfMaintenanceApeak" value="Maintenance aPeak"/>
+      <Text id="TN_M_XPFV_Param_ConfMaintenanceTemp" value="Maintenance Temperature"/>
+      <Text id="TN_M_XPFS_Param_ConfEvent" value="Event Configuration"/>
+      <Text id="TN_M_XPFS_Param_ConfIO" value="I/O Configuration"/>
+      <Text id="TN_M_XPFV_Param_ConfIO_AOVrms" value="Analog Output vRMS"/>
+      <Text id="TN_M_XPFV_Param_ConfIO_AOArms" value="Analog Output aRMS"/>
+      <Text id="TN_M_XPFV_Param_ConfIO_AOApeak" value="Analog Output aPeak"/>
+      <Text id="TN_M_XPFV_Param_ConfIO_AOTemp" value="Analog Output Temperature"/>
+      <Text id="TN_M_CP_Param_GeneralSettings" value="General Settings"/>
+      <Text id="TN_M_CP_Diag_DeviceStatusInfo" value="Device Status Information"/>
+      <Text id="TN_M_XPFS_Diag_InfoOper" value="Operating Information"/>
+      <Text id="TN_M_XPFS_Diag_InfoMaintenance" value="Maintenance Information"/>
+      <Text id="TN_M_XPFV_Diag_InfoMaintenanceVrms" value="Maintenance vRMS"/>
+      <Text id="TN_M_XPFV_Diag_InfoMaintenanceArms" value="Maintenance aRMS"/>
+      <Text id="TN_M_XPFV_Diag_InfoMaintenanceApeak" value="Maintenance aPeak"/>
+      <Text id="TN_M_XPFV_Diag_InfoMaintenanceTemp" value="Maintenance Temperature"/>
+      <Text id="TN_M_XPFS_Diag_InfoDevice" value="Device Characteristics"/>
+      <Text id="TN_M_XPFS_Diag_InfoComm" value="Communication Characteristics"/>
+      <Text id="TN_M_XPFS_Diag_InfoMeasData" value="Measurement Data Information"/>
+      <Text id="TN_M_CP_Diag_ServiceFunctions" value="Service Functions"/>
+    </PrimaryLanguage>
+  </ExternalTextCollection>
+  <Stamp crc="3566404507"><Checker name="IODD-Checker V1.1.11" version="V1.1.11.0"/></Stamp>
+</IODevice>

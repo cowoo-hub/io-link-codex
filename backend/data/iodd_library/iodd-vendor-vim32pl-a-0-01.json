@@ -1,0 +1,990 @@
+{
+  "profileId": "iodd:vendor:vim32pl-a-0-01",
+  "parserVersion": 2,
+  "source": "iodd",
+  "fileName": "Pepperl-Fuchs-VIM32PL-05308417-20240917-IODD1.1.xml",
+  "uploadedAtUtc": "2026-04-09T00:59:31.920365+00:00",
+  "vendorId": null,
+  "vendorName": null,
+  "deviceId": null,
+  "deviceName": "VIM32PL-*A*-0*-*01",
+  "deviceFamily": "Vibration Sensor",
+  "productId": null,
+  "processDataInBitLength": 128,
+  "processDataOutBitLength": null,
+  "processDataProfile": {
+    "id": "iodd:vendor:vim32pl-a-0-01",
+    "name": "VIM32PL-*A*-0*-*01",
+    "description": "IODD-derived profile for VIM32PL-*A*-0*-*01",
+    "deviceKey": "VIM32PL-*A*-0*-*01",
+    "vendorId": null,
+    "deviceId": null,
+    "totalBitLength": 128,
+    "sourceWordCount": 8,
+    "fields": [
+      {
+        "name": "ssc4-1-temperature",
+        "label": "SSC4.1 - Temperature",
+        "bitOffset": 0,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the temperature switching signal 4.1 for measurement data channel 4.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "ssc4-2-temperature",
+        "label": "SSC4.2 - Temperature",
+        "bitOffset": 1,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the temperature switching signal 4.2 for measurement data channel 4.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "dsc-1-maintenance-warning",
+        "label": "DSC.1 - Maintenance Warning",
+        "bitOffset": 4,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "status",
+        "unit": null,
+        "description": "Indicates that at least one of the configured maintenance limits has been exceeded.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Inactive"
+          },
+          {
+            "value": 1,
+            "label": "Active"
+          }
+        ]
+      },
+      {
+        "name": "mdc4-scale",
+        "label": "MDC4 - Scale",
+        "bitOffset": 8,
+        "bitLength": 8,
+        "type": "int",
+        "role": "scale",
+        "unit": null,
+        "description": "Shows the multiplier for the temperature measurement value of measurement data channel 4 - 10exp(scale).",
+        "enumMappings": []
+      },
+      {
+        "name": "mdc4-temperature",
+        "label": "MDC4 - Temperature",
+        "bitOffset": 16,
+        "bitLength": 16,
+        "type": "int",
+        "role": "primary_value",
+        "unit": null,
+        "description": "Shows the current temperature measurement value of measurement data channel 4.",
+        "enumMappings": [
+          {
+            "value": 32764,
+            "label": "No Measurement Data"
+          }
+        ]
+      },
+      {
+        "name": "ssc3-1-apeak",
+        "label": "SSC3.1 - aPeak",
+        "bitOffset": 32,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the acceleration peak switching signal 3.1 for measurement data channel 3.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "ssc3-2-apeak",
+        "label": "SSC3.2 - aPeak",
+        "bitOffset": 33,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the acceleration peak switching signal 3.2 for measurement data channel 3.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "mdc3-scale",
+        "label": "MDC3 - Scale",
+        "bitOffset": 40,
+        "bitLength": 8,
+        "type": "int",
+        "role": "scale",
+        "unit": null,
+        "description": "Shows the multiplier for the acceleration peak measurement value of measurement data channel 3 - 10exp(scale).",
+        "enumMappings": []
+      },
+      {
+        "name": "mdc3-apeak",
+        "label": "MDC3 - aPeak",
+        "bitOffset": 48,
+        "bitLength": 16,
+        "type": "int",
+        "role": "meta",
+        "unit": null,
+        "description": "Shows the current acceleration peak measurement value of measurement data channel 3.",
+        "enumMappings": [
+          {
+            "value": 32764,
+            "label": "No Measurement Data"
+          }
+        ]
+      },
+      {
+        "name": "ssc2-1-arms",
+        "label": "SSC2.1 - aRMS",
+        "bitOffset": 64,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the acceleration rms switching signal 2.1 for measurement data channel 2.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "ssc2-2-arms",
+        "label": "SSC2.2 - aRMS",
+        "bitOffset": 65,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the acceleration rms switching signal 2.2 for measurement data channel 2.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "mdc2-scale",
+        "label": "MDC2 - Scale",
+        "bitOffset": 72,
+        "bitLength": 8,
+        "type": "int",
+        "role": "scale",
+        "unit": null,
+        "description": "Shows the multiplier for the acceleration rms measurement value of measurement data channel 2 - 10exp(scale).",
+        "enumMappings": []
+      },
+      {
+        "name": "mdc2-arms",
+        "label": "MDC2 - aRMS",
+        "bitOffset": 80,
+        "bitLength": 16,
+        "type": "int",
+        "role": "meta",
+        "unit": null,
+        "description": "Shows the current acceleration rms measurement value of measurement data channel 2.",
+        "enumMappings": [
+          {
+            "value": 32764,
+            "label": "No Measurement Data"
+          }
+        ]
+      },
+      {
+        "name": "ssc1-1-vrms",
+        "label": "SSC1.1 - vRMS",
+        "bitOffset": 96,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the velocity rms switching signal 1.1 for measurement data channel 1.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "ssc1-2-vrms",
+        "label": "SSC1.2 - vRMS",
+        "bitOffset": 97,
+        "bitLength": 1,
+        "type": "bool",
+        "role": "meta",
+        "unit": null,
+        "description": "Indicates the current status of the velocity rms switching signal 1.2 for measurement data channel 1.",
+        "enumMappings": [
+          {
+            "value": 0,
+            "label": "Low"
+          },
+          {
+            "value": 1,
+            "label": "High"
+          }
+        ]
+      },
+      {
+        "name": "mdc1-scale",
+        "label": "MDC1 - Scale",
+        "bitOffset": 104,
+        "bitLength": 8,
+        "type": "int",
+        "role": "scale",
+        "unit": null,
+        "description": "Shows the multiplier for the velocity rms measurement value of measurement data channel 1 - 10exp(scale).",
+        "enumMappings": []
+      },
+      {
+        "name": "mdc1-vrms",
+        "label": "MDC1 - vRMS",
+        "bitOffset": 112,
+        "bitLength": 16,
+        "type": "int",
+        "role": "meta",
+        "unit": null,
+        "description": "Shows the current velocity rms measurement value of measurement data channel 1.",
+        "enumMappings": [
+          {
+            "value": 32764,
+            "label": "No Measurement Data"
+          }
+        ]
+      }
+    ],
+    "primaryFieldName": "mdc4-temperature"
+  },
+  "isduVariables": [
+    {
+      "key": "25:0:v-cp-functiontag",
+      "name": "V_CP_FunctionTag",
+      "index": 25,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Possibility to mark a device with function-specific information.",
+      "enumMappings": []
+    },
+    {
+      "key": "26:0:v-cp-locationtag",
+      "name": "V_CP_LocationTag",
+      "index": 26,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Possibility to mark a device with location-specific information.",
+      "enumMappings": []
+    },
+    {
+      "key": "27:0:v-cp-producturi",
+      "name": "V_CP_ProductURI",
+      "index": 27,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides a unique instance identification compliant to DIN-SPEC 91406.",
+      "enumMappings": []
+    },
+    {
+      "key": "64:0:v-xpfv-ssc11-param",
+      "name": "V_XPFV_SSC11_Param",
+      "index": 64,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 1.1 vRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "65:0:v-xpfv-ssc11-config",
+      "name": "V_XPFV_SSC11_Config",
+      "index": 65,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 1.1 vRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "66:0:v-xpfv-ssc12-param",
+      "name": "V_XPFV_SSC12_Param",
+      "index": 66,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 1.2 vRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "67:0:v-xpfv-ssc12-config",
+      "name": "V_XPFV_SSC12_Config",
+      "index": 67,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 1.2 vRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "68:0:v-xpfv-ssc21-param",
+      "name": "V_XPFV_SSC21_Param",
+      "index": 68,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 2.1 aRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "69:0:v-xpfv-ssc21-config",
+      "name": "V_XPFV_SSC21_Config",
+      "index": 69,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 2.1 aRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "70:0:v-xpfv-ssc22-param",
+      "name": "V_XPFV_SSC22_Param",
+      "index": 70,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 2.2 aRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "71:0:v-xpfv-ssc22-config",
+      "name": "V_XPFV_SSC22_Config",
+      "index": 71,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 2.2 aRMS.",
+      "enumMappings": []
+    },
+    {
+      "key": "72:0:v-xpfv-ssc31-param",
+      "name": "V_XPFV_SSC31_Param",
+      "index": 72,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 3.1 aPeak.",
+      "enumMappings": []
+    },
+    {
+      "key": "73:0:v-xpfv-ssc31-config",
+      "name": "V_XPFV_SSC31_Config",
+      "index": 73,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 3.1 aPeak.",
+      "enumMappings": []
+    },
+    {
+      "key": "74:0:v-xpfv-ssc32-param",
+      "name": "V_XPFV_SSC32_Param",
+      "index": 74,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 3.2 aPeak.",
+      "enumMappings": []
+    },
+    {
+      "key": "75:0:v-xpfv-ssc32-config",
+      "name": "V_XPFV_SSC32_Config",
+      "index": 75,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 3.2 aPeak.",
+      "enumMappings": []
+    },
+    {
+      "key": "76:0:v-xpfv-ssc41-param",
+      "name": "V_XPFV_SSC41_Param",
+      "index": 76,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 4.1 Temperature.",
+      "enumMappings": []
+    },
+    {
+      "key": "77:0:v-xpfv-ssc41-config",
+      "name": "V_XPFV_SSC41_Config",
+      "index": 77,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 4.1 Temperature.",
+      "enumMappings": []
+    },
+    {
+      "key": "78:0:v-xpfv-ssc42-param",
+      "name": "V_XPFV_SSC42_Param",
+      "index": 78,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for switching signal channel 4.2 Temperature.",
+      "enumMappings": []
+    },
+    {
+      "key": "79:0:v-xpfv-ssc42-config",
+      "name": "V_XPFV_SSC42_Config",
+      "index": 79,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the configuration parameter for switching signal channel 4.2 Temperature.",
+      "enumMappings": []
+    },
+    {
+      "key": "84:0:v-xpfv-ssc11-offdelay",
+      "name": "V_XPFV_SSC11_OffDelay",
+      "index": 84,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the vRMS detection signal on the switching signal channel 1.1. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "85:0:v-xpfv-ssc12-offdelay",
+      "name": "V_XPFV_SSC12_OffDelay",
+      "index": 85,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the vRMS detection signal on the switching signal channel 1.2. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "86:0:v-xpfv-ssc21-offdelay",
+      "name": "V_XPFV_SSC21_OffDelay",
+      "index": 86,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the aRMS detection signal on the switching signal channel 2.1. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "87:0:v-xpfv-ssc22-offdelay",
+      "name": "V_XPFV_SSC22_OffDelay",
+      "index": 87,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the aRMS detection signal on the switching signal channel 2.2. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "88:0:v-xpfv-ssc31-offdelay",
+      "name": "V_XPFV_SSC31_OffDelay",
+      "index": 88,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the aPeak detection signal on the switching signal channel 3.1. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "89:0:v-xpfv-ssc32-offdelay",
+      "name": "V_XPFV_SSC32_OffDelay",
+      "index": 89,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the aPeak detection signal on the switching signal channel 3.2. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "90:0:v-xpfv-ssc41-offdelay",
+      "name": "V_XPFV_SSC41_OffDelay",
+      "index": 90,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the temperature detection signal on the switching signal channel 4.1. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "91:0:v-xpfv-ssc42-offdelay",
+      "name": "V_XPFV_SSC42_OffDelay",
+      "index": 91,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the minimum duration of a stable inactive state of the temperature detection signal on the switching signal channel 4.2. Shorter inactive signals will be suppressed.",
+      "enumMappings": []
+    },
+    {
+      "key": "96:0:v-xpfv-eval-filter",
+      "name": "V_XPFV_Eval_Filter",
+      "index": 96,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the filter bandwidth for vibration signal evaluation. The filter is applied to MDC1 and MDC2 and has a 3rd order Butterworth characteristic. DIN ISO 10816/20816 requires 10 .. 1000 Hz.",
+      "enumMappings": []
+    },
+    {
+      "key": "112:0:v-xpfv-io-cqoutfunc",
+      "name": "V_XPFV_IO_CQOutFunc",
+      "index": 112,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the function of the output signal at C/Q (pin 4) in SIO mode.",
+      "enumMappings": []
+    },
+    {
+      "key": "113:0:v-xpfv-io-iqoutfunc",
+      "name": "V_XPFV_IO_IQOutFunc",
+      "index": 113,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the function of the output signal at I/Q (pin 2).",
+      "enumMappings": []
+    },
+    {
+      "key": "114:0:v-xpfv-io-aoparamvrms",
+      "name": "V_XPFV_IO_AOParamVrms",
+      "index": 114,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint value for the maximum value at the analog output.",
+      "enumMappings": []
+    },
+    {
+      "key": "115:0:v-xpfv-io-aoparamarms",
+      "name": "V_XPFV_IO_AOParamArms",
+      "index": 115,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint value for the maximum value at the analog output.",
+      "enumMappings": []
+    },
+    {
+      "key": "116:0:v-xpfv-io-aoparamapeak",
+      "name": "V_XPFV_IO_AOParamApeak",
+      "index": 116,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint value for the maximum value at the analog output.",
+      "enumMappings": []
+    },
+    {
+      "key": "117:0:v-xpfv-io-aoparamtemp",
+      "name": "V_XPFV_IO_AOParamTemp",
+      "index": 117,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the setpoint values for the minimum and maximum value at the analog output.",
+      "enumMappings": []
+    },
+    {
+      "key": "120:0:v-xpfs-event-config",
+      "name": "V_XPFS_Event_Config",
+      "index": 120,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines which event sources can trigger events.",
+      "enumMappings": []
+    },
+    {
+      "key": "176:0:v-xpfs-device-char",
+      "name": "V_XPFS_Device_Char",
+      "index": 176,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows relevant key characteristics of the device for use in applications.",
+      "enumMappings": []
+    },
+    {
+      "key": "177:0:v-xpfv-mdc1-descriptor",
+      "name": "V_XPFV_MDC1_Descriptor",
+      "index": 177,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Descriptor for the characteristic of the measurement data channel 1 (process data MV).",
+      "enumMappings": []
+    },
+    {
+      "key": "178:0:v-xpfv-mdc2-descriptor",
+      "name": "V_XPFV_MDC2_Descriptor",
+      "index": 178,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Descriptor for the characteristic of the measurement data channel 2 (process data MV).",
+      "enumMappings": []
+    },
+    {
+      "key": "179:0:v-xpfv-mdc3-descriptor",
+      "name": "V_XPFV_MDC3_Descriptor",
+      "index": 179,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Descriptor for the characteristic of the measurement data channel 3 (process data MV).",
+      "enumMappings": []
+    },
+    {
+      "key": "180:0:v-xpfv-mdc4-descriptor",
+      "name": "V_XPFV_MDC4_Descriptor",
+      "index": 180,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Descriptor for the characteristic of the measurement data channel 4 (process data MV).",
+      "enumMappings": []
+    },
+    {
+      "key": "208:0:v-xpfv-maintenance-configvrms",
+      "name": "V_XPFV_Maintenance_ConfigVrms",
+      "index": 208,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides settings for configuration of vRMS maintenance monitoring.",
+      "enumMappings": []
+    },
+    {
+      "key": "209:0:v-xpfv-maintenance-configarms",
+      "name": "V_XPFV_Maintenance_ConfigArms",
+      "index": 209,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides settings for configuration of aRMS maintenance monitoring.",
+      "enumMappings": []
+    },
+    {
+      "key": "210:0:v-xpfv-maintenance-configapeak",
+      "name": "V_XPFV_Maintenance_ConfigApeak",
+      "index": 210,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides settings for configuration of aPeak maintenance monitoring.",
+      "enumMappings": []
+    },
+    {
+      "key": "211:0:v-xpfv-maintenance-configtemp",
+      "name": "V_XPFV_Maintenance_ConfigTemp",
+      "index": 211,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides settings for configuration of temperature maintenance monitoring.",
+      "enumMappings": []
+    },
+    {
+      "key": "213:0:v-xpfv-maintenance-configoper",
+      "name": "V_XPFV_Maintenance_ConfigOper",
+      "index": 213,
+      "subindex": 0,
+      "accessRights": "rw",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Defines the limit for the accumulated operating time for a planned maintenance cycle in hours. The according maintenance alarm will be set, if this limit is exceeded.",
+      "enumMappings": []
+    },
+    {
+      "key": "216:0:v-xpfv-maintenance-monvrms",
+      "name": "V_XPFV_Maintenance_MonVrms",
+      "index": 216,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the accumulated monitor data since the last maintenance reset for the vRMS measurement channel.",
+      "enumMappings": []
+    },
+    {
+      "key": "217:0:v-xpfv-maintenance-monarms",
+      "name": "V_XPFV_Maintenance_MonArms",
+      "index": 217,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the accumulated monitor data since the last maintenance reset for the aRMS measurement channel.",
+      "enumMappings": []
+    },
+    {
+      "key": "218:0:v-xpfv-maintenance-monapeak",
+      "name": "V_XPFV_Maintenance_MonApeak",
+      "index": 218,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the accumulated monitor data since the last maintenance reset for the aPeak measurement channel.",
+      "enumMappings": []
+    },
+    {
+      "key": "219:0:v-xpfv-maintenance-montemp",
+      "name": "V_XPFV_Maintenance_MonTemp",
+      "index": 219,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the accumulated monitor data since the last maintenance reset for the temperature measurement channel.",
+      "enumMappings": []
+    },
+    {
+      "key": "221:0:v-xpfv-maintenance-monopertime",
+      "name": "V_XPFV_Maintenance_MonOperTime",
+      "index": 221,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the time in hours in powered operation since the last maintenance reset.",
+      "enumMappings": []
+    },
+    {
+      "key": "223:0:v-xpfv-maintenance-status",
+      "name": "V_XPFV_Maintenance_Status",
+      "index": 223,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the diagnosis status of the different maintenance evaluation channels.",
+      "enumMappings": []
+    },
+    {
+      "key": "224:0:v-xpfs-opm-operhour",
+      "name": "V_XPFS_OPM_OperHour",
+      "index": 224,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Shows the overall hours of operation since initial commissioning.",
+      "enumMappings": []
+    },
+    {
+      "key": "225:0:v-xpfs-opm-tempind",
+      "name": "V_XPFS_OPM_TempInd",
+      "index": 225,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Indicates the operation at ambient temperatures close to or in excess of specification limits.",
+      "enumMappings": []
+    },
+    {
+      "key": "226:0:v-xpfs-opm-tempmon",
+      "name": "V_XPFS_OPM_TempMon",
+      "index": 226,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Contains parameters showing current and past conditions of temperature exposure since initial commissioning.",
+      "enumMappings": []
+    },
+    {
+      "key": "227:0:v-xpfs-opm-powermon",
+      "name": "V_XPFS_OPM_PowerMon",
+      "index": 227,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Contains parameters showing current and past conditions of power cycles since initial commissioning.",
+      "enumMappings": []
+    },
+    {
+      "key": "236:0:v-xpfs-observedata",
+      "name": "V_XPFS_ObserveData",
+      "index": 236,
+      "subindex": 0,
+      "accessRights": "ro",
+      "dataType": null,
+      "bitLength": null,
+      "unit": null,
+      "description": "Provides a set of relevant data suitable for observation purposes.",
+      "enumMappings": []
+    }
+  ]
+}
